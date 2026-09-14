@@ -42,7 +42,8 @@
     <div class="barra__der">
       <span class="estado" id="estado">Sin cambios</span>
       <button class="btn btn--fantasma" id="btn-descartar">Descartar cambios</button>
-      <button class="btn btn--oro" id="btn-descargar">Descargar archivo actualizado</button>
+      <button class="btn btn--fantasma" id="btn-descargar">Descargar archivo</button>
+      <button class="btn btn--oro" id="btn-publicar">Publicar ahora</button>
     </div>
   </header>
 
@@ -54,17 +55,21 @@
     <section class="tarjeta pasos">
       <h2>Cómo se publican los cambios</h2>
       <p class="nota">Los cambios que hacés acá quedan guardados en este navegador
-        hasta que los publiques. La web sigue mostrando lo anterior hasta el paso 3.</p>
+        hasta que toques <b>Publicar ahora</b>. Hasta ese momento la web sigue
+        mostrando lo anterior, así que podés editar tranquila sin miedo a romper nada.</p>
       <ol>
         <li><b>Editá</b> lo que quieras acá abajo.</li>
-        <li><b>Descargá el archivo</b> con el botón de arriba. Se baja un <code>data.js</code>.</li>
-        <li><b>Reemplazá</b> el archivo viejo en <code>js/data.js</code> de la carpeta del proyecto,
-            y corré este comando en la Terminal:
-          <code class="comando">cd "/Users/usuario/Desktop/calude/paginas wep/perfumes" &amp;&amp; vercel --prod --yes</code>
-        </li>
+        <li><b>Publicar ahora</b>, el botón dorado de arriba. Listo: la web se
+          actualiza sola en menos de un minuto. No hay que tocar la Terminal.</li>
       </ol>
-      <p class="nota">¿Agregaste un producto nuevo? Acordate de guardar también su
-        foto en <code>assets/img/</code> con el nombre exacto que pusiste en el campo Foto.</p>
+      <p class="nota">¿Agregaste un producto nuevo? La foto es el único paso que
+        todavía va a mano: guardala en <code>assets/img/</code> de la carpeta del
+        proyecto con el nombre exacto que pusiste en el campo Foto, y subila con
+        <code class="comando">git add -A &amp;&amp; git commit -m "foto nueva" &amp;&amp; git push</code>
+        Mientras no esté la foto, el producto queda oculto en la tienda.</p>
+      <p class="nota"><b>Descargar archivo</b> es el plan B: te baja el
+        <code>data.js</code> para guardarlo a mano si algún día falla la publicación
+        automática.</p>
     </section>
 
     <!-- ---------- Configuración ---------- -->

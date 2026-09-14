@@ -17,14 +17,18 @@
 
   /* ============================================================
      LLAVE DE ENTRADA
-     Ojo: esto es un pestillo, no una cerradura. Sirve para que
-     nadie entre de casualidad, pero alguien que sepa mirar el
-     código de la página la puede ver. No importa: aunque entre,
-     sólo puede jugar con una copia en SU navegador — para
-     cambiar la tienda de verdad hace falta tu cuenta de Vercel.
-     Cambiala por la que quieras.
+     La clave NO está escrita acá. Se comprueba en el servidor
+     (api/publicar), donde vive como variable de entorno y nadie
+     puede leerla mirando el código de la página.
+
+     Para cambiarla: Vercel → el proyecto → Settings →
+     Environment Variables → PANEL_CLAVE.
+
+     Se guarda en memoria mientras dure la pestaña, porque hace
+     falta mandarla de nuevo cada vez que publicás. No se guarda
+     en el navegador ni queda escrita en ningún lado.
      ============================================================ */
-  const LLAVE = '701parfum';
+  let llaveEnUso = '';
 
   const guardado = {
     leer: (k, x) => { try { return JSON.parse(localStorage.getItem(k)) ?? x; } catch (e) { return x; } },
@@ -60,18 +64,50 @@
     marcarEstado();
   }
 
-  $('#form-llave').addEventListener('submit', (e) => {
+  $('#form-llave').addEventListener('submit', async (e) => {
     e.preventDefault();
-    if ($('#llave').value.trim() === LLAVE) {
-      sessionStorage.setItem('701_panel_ok', '1');
+    const intento = $('#llave').value.trim();
+    const boton = $('#form-llave button[type="submit"]');
+
+    $('#error-llave').textContent = '';
+    boton.disabled = true;
+    boton.textContent = 'Comprobando…';
+
+    try {
+      const r = await fetch('/api/publicar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clave: intento, accion: 'verificar' }),
+      });
+
+      /* La API siempre contesta en JSON. Si lo que vuelve no lo es,
+         no hay API del otro lado: estás abriendo el panel desde la
+         carpeta y no desde la web publicada. */
+      const d = await r.json().catch(() => null);
+
+      if (r.ok) {
+        llaveEnUso = intento;
+        entrar();
+      } else if (d === null) {
+        llaveEnUso = intento;
+        entrar();
+        aviso('Abriste el panel sin servidor: podés editar y descargar, pero no publicar.', 'ojo');
+      } else {
+        $('#error-llave').textContent = d.error || 'Esa no es la clave.';
+        $('#llave').select();
+      }
+    } catch (err) {
+      /* Sin servidor (abriendo el archivo directo desde la carpeta, o
+         sin internet) no hay con qué comprobar. Dejamos entrar para
+         poder editar, pero publicar va a pedir la clave igual. */
+      llaveEnUso = intento;
       entrar();
-    } else {
-      $('#error-llave').textContent = 'Esa no es la clave.';
-      $('#llave').select();
+      aviso('Estás sin conexión al servidor: podés editar, pero al publicar te va a pedir la clave.', 'ojo');
+    } finally {
+      boton.disabled = false;
+      boton.textContent = 'Entrar';
     }
   });
-
-  if (sessionStorage.getItem('701_panel_ok') === '1') entrar();
 
   /* ============================================================
      LISTA DE PRODUCTOS
@@ -420,7 +456,69 @@ const PRODUCTOS = [
     document.body.appendChild(a);
     a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
-    aviso('Archivo descargado. Ahora seguí los tres pasos de abajo.', 'ok');
+    aviso('Archivo descargado. Guardalo en js/data.js de la carpeta del proyecto.', 'ok');
+  }
+
+  /* ============================================================
+     PUBLICAR
+     Manda el catálogo al servidor, que lo guarda en GitHub. Vercel
+     ve el cambio y republica la web sola, en menos de un minuto.
+     ============================================================ */
+  async function publicar() {
+    if (!hayCambios) {
+      aviso('No hay nada nuevo para publicar.', 'ojo');
+      return;
+    }
+
+    const texto = generarArchivo();
+
+    /* Mismo control que al descargar: si el archivo tiene un error de
+       sintaxis, la tienda entera deja de cargar. Mejor frenarlo acá. */
+    try {
+      new Function(texto + '\nreturn [CONFIG, PRODUCTOS];')();
+    } catch (err) {
+      alert('El catálogo salió con un error y no lo voy a publicar,\n' +
+            'porque rompería la tienda:\n\n' + err.message);
+      return;
+    }
+
+    if (!confirm('Se va a publicar en la web de verdad.\n\n' +
+                 productos.length + ' productos.\n\n¿Vamos?')) return;
+
+    const boton = $('#btn-publicar');
+    boton.disabled = true;
+    boton.textContent = 'Publicando…';
+    aviso('Mandando los cambios…', 'ojo');
+
+    try {
+      const r = await fetch('/api/publicar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clave: llaveEnUso, contenido: texto }),
+      });
+      const d = await r.json().catch(() => ({}));
+
+      if (!r.ok) {
+        /* La clave puede haber cambiado en Vercel desde que entraste. */
+        if (r.status === 401) {
+          const otra = prompt('La clave no es correcta. Escribila de nuevo:');
+          if (otra) { llaveEnUso = otra.trim(); boton.disabled = false; boton.textContent = 'Publicar ahora'; return publicar(); }
+        }
+        throw new Error(d.error || ('El servidor respondió ' + r.status + '.'));
+      }
+
+      hayCambios = false;
+      localStorage.removeItem(CLAVE_BORRADOR);
+      marcarEstado();
+      aviso('¡Publicado! La web se actualiza sola en menos de un minuto. ' +
+            'Si no ves el cambio, recargá con Ctrl+Shift+R.', 'ok');
+    } catch (err) {
+      aviso('No se pudo publicar: ' + err.message +
+            ' — Probá de nuevo, o usá "Descargar archivo" como plan B.', 'mal');
+    } finally {
+      boton.disabled = false;
+      boton.textContent = 'Publicar ahora';
+    }
   }
 
   /* ============================================================
@@ -438,6 +536,7 @@ const PRODUCTOS = [
       : 'Sin cambios';
     $('#estado').className = hayCambios ? 'estado con-cambios' : 'estado';
     $('#btn-descargar').disabled = false;
+    $('#btn-publicar').disabled = !hayCambios;
   }
 
   let relojAviso;
@@ -486,6 +585,7 @@ const PRODUCTOS = [
 
   $('#buscar').addEventListener('input', (e) => { filtro = e.target.value; pintarLista(); });
   $('#btn-descargar').addEventListener('click', descargar);
+  $('#btn-publicar').addEventListener('click', publicar);
 
   $('#btn-descartar').addEventListener('click', () => {
     if (!confirm('¿Descartar todos los cambios y volver a lo que está publicado?')) return;
