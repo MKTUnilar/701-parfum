@@ -1,6 +1,6 @@
 /* =============================================================
    701 PARFUM — Configuración y catálogo
-   Generado desde el panel el 14/9/2026, 05:20:52.
+   Generado desde el panel el 14/9/2026, 05:23:59.
    Se puede editar a mano igual: es un archivo de texto común.
    ============================================================= */
 
@@ -42,7 +42,7 @@ const PRODUCTOS = [
     img: 'assets/img/hawas-kobra.webp',
     tono: ['#2a0c0c', '#7d2320'],
     destacado: true,
-    stock: true,
+    stock: false,
   },
   {
     id: 'hawas-black',
@@ -53,7 +53,7 @@ const PRODUCTOS = [
     descripcion: 'Elegante y versátil. Cítricos frescos que abren paso a un corazón aromático y un fondo de maderas oscuras. Va de la oficina a la noche sin escalas.',
     notas: ['Cítricos', 'Lavanda', 'Cedro', 'Almizcle'],
     duracion: '8–10 h',
-    precios: { '100 ml': 50000 },
+    precios: { '100 ml': 150000 },
     img: 'assets/img/hawas-black.webp',
     tono: ['#0c0c0e', '#3a3a42'],
     destacado: false,
@@ -701,36 +701,6 @@ const PRODUCTOS = [
     precios: { '100 ml': 50000 },
     img: 'assets/img/veneno.webp',
     tono: ['#0d0d0f', '#c9a227'],
-    destacado: true,
-    stock: true,
-  },
-  {
-    id: 'veneno-bianco',
-    nombre: 'Veneno Bianco',
-    marca: 'French Avenue',
-    categoria: 'unisex',
-    familia: 'Floral amaderado',
-    descripcion: 'La versión blanca de Veneno, con las mismas serpientes doradas en relieve. Más luminoso que el original: sale de un fondo claro en vez de del cuero negro. También gira en la portada, junto al negro.',
-    notas: ['Jazmín', 'Sándalo', 'Almizcle blanco', 'Vainilla'],
-    duracion: '8–10 h',
-    precios: { '100 ml': 50000 },
-    img: 'assets/img/veneno-bianco.webp',
-    tono: ['#e8e4d8', '#c9a227'],
-    destacado: true,
-    stock: true,
-  },
-  {
-    id: 'veneno-scarlet',
-    nombre: 'Veneno Scarlet',
-    marca: 'French Avenue',
-    categoria: 'unisex',
-    familia: 'Frutal especiado',
-    descripcion: 'La versión roja de Veneno, cuerpo laqueado con las serpientes doradas. Más intensa y cálida que el negro. También gira en la portada.',
-    notas: ['Frutos rojos', 'Canela', 'Ámbar', 'Cuero'],
-    duracion: '8–10 h',
-    precios: { '100 ml': 50000 },
-    img: 'assets/img/veneno-scarlet.webp',
-    tono: ['#7a1410', '#c9a227'],
     destacado: true,
     stock: true,
   },
