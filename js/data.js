@@ -1,21 +1,7 @@
 /* =============================================================
    701 PARFUM — Configuración y catálogo
-   Editá SOLO este archivo para cambiar precios, productos y datos
-   de contacto. No hace falta tocar el resto del código.
-
-   DISPONIBILIDAD: cada producto tiene una línea `stock`.
-     stock: true   ->  "Stock inmediato"  (lo tenés ahora, sale ya)
-     stock: false  ->  "Por encargo"      (lo traés a pedido)
-   Están todos en `true`. Cambiá a `false` los que haya que encargar.
-
-   ¿Un producto no aparece en la web? Fijate si tiene `oculto: true`. Eso pasa
-   cuando todavía no tiene foto. Guardás la foto en assets/img/ con el nombre
-   que dice el campo `img`, borrás esa línea, y vuelve a aparecer.
-
-   ⚠️ REVISAR ANTES DE PUBLICAR:
-      1. CONFIG.whatsapp  → tu número real
-      2. Los PRECIOS de abajo son de referencia: poné los tuyos
-      3. Las fotos van en assets/img/ con el nombre indicado en `img`
+   Generado desde el panel el 14/9/2026, 05:11:07.
+   Se puede editar a mano igual: es un archivo de texto común.
    ============================================================= */
 
 const CONFIG = {
@@ -25,27 +11,24 @@ const CONFIG = {
   instagramAlt: 'fmartinn_22',
 
   // WhatsApp con código de país, sin +, sin espacios ni guiones.
-  // 2975925565  ->  54 (Argentina) + 9 (celular) + 297 + 5925565
-  // Si lo dejás vacío (''), los pedidos vuelven a ir al DM de Instagram.
+  // Vacío ('') = los pedidos van al DM de Instagram.
   whatsapp: '5492975925565',
 
   moneda: 'ARS',            // pesos argentinos
-  envio: null,              // null = "a coordinar". Poné un número para cobrar envío fijo.
-  envioGratisDesde: 0,      // 0 = sin promo de envío gratis
+  envio: null,              // null = "a coordinar"
+  envioGratisDesde: 0,
 
   email: 'contacto@701parfum.com',
   ciudad: 'Argentina 🇦🇷',
 };
 
 /* -------------------------------------------------------------
-   CATÁLOGO — perfumes originales importados
+   CATÁLOGO
    categoria: 'hombre' | 'mujer' | 'unisex'
-   img:  'assets/img/archivo.jpg'  → si el archivo no existe todavía,
-         se dibuja automáticamente un frasco con los colores de `tono`.
+   stock: true = "Stock inmediato" · false = "Por encargo"
+   oculto: true = no aparece en la web (por ejemplo, si falta la foto)
    ------------------------------------------------------------- */
 const PRODUCTOS = [
-
-  /* ---------------- HOMBRE ---------------- */
   {
     id: 'hawas-kobra',
     nombre: 'Hawas Kobra',
@@ -55,7 +38,7 @@ const PRODUCTOS = [
     descripcion: 'La versión más oscura e intensa de la línea Hawas. Especias cálidas sobre maderas y ámbar, con una estela profunda ideal para la noche.',
     notas: ['Especias', 'Maderas', 'Ámbar', 'Cuero'],
     duracion: '9–11 h',
-    precios: { '100 ml': 50000 },
+    precios: { '100 ml': 60000 },
     img: 'assets/img/hawas-kobra.webp',
     tono: ['#2a0c0c', '#7d2320'],
     destacado: true,
@@ -211,7 +194,6 @@ const PRODUCTOS = [
     destacado: false,
     stock: true,
   },
-
   {
     id: 'hawas-him',
     nombre: 'Hawas For Him',
@@ -274,7 +256,7 @@ const PRODUCTOS = [
   },
   {
     id: 'qaaed',
-    nombre: "Qaa'ed",
+    nombre: 'Qaa\'ed',
     marca: 'Lattafa',
     categoria: 'hombre',
     familia: 'Amaderado especiado',
@@ -317,7 +299,6 @@ const PRODUCTOS = [
     destacado: false,
     stock: true,
   },
-
   {
     id: 'bharara-king-gold',
     nombre: 'Bharara King Gold Edition',
@@ -378,8 +359,6 @@ const PRODUCTOS = [
     destacado: false,
     stock: true,
   },
-
-  /* ---------------- MUJER ---------------- */
   {
     id: 'hawas-eclat',
     nombre: 'Hawas For Her Éclat',
@@ -457,7 +436,7 @@ const PRODUCTOS = [
   },
   {
     id: 'miss-armaf-magnifiq',
-    nombre: "Miss Armaf Magnifiq",
+    nombre: 'Miss Armaf Magnifiq',
     marca: 'Armaf',
     categoria: 'mujer',
     familia: 'Gourmand floral',
@@ -545,7 +524,6 @@ const PRODUCTOS = [
     destacado: false,
     stock: true,
   },
-
   {
     id: 'yara-moi',
     nombre: 'Yara Moi',
@@ -621,7 +599,6 @@ const PRODUCTOS = [
     destacado: false,
     stock: true,
   },
-
   {
     id: 'nectar-of-ecstasy',
     nombre: 'Nectar of Ecstasy',
@@ -652,8 +629,6 @@ const PRODUCTOS = [
     destacado: false,
     stock: true,
   },
-
-  /* ---------------- UNISEX ---------------- */
   {
     id: 'cdn-untold',
     nombre: 'Club de Nuit Untold',
@@ -759,7 +734,6 @@ const PRODUCTOS = [
     destacado: true,
     stock: true,
   },
-
   {
     id: 'amber-oud-gold',
     nombre: 'Amber Oud Gold Edition',
@@ -775,7 +749,6 @@ const PRODUCTOS = [
     destacado: true,
     stock: true,
   },
-
   {
     id: 'odyssey-go-mango',
     nombre: 'Odyssey Go Mango',
