@@ -1,6 +1,6 @@
 /* =============================================================
    701 PARFUM — Configuración y catálogo
-   Generado desde el panel el 14/9/2026, 05:23:59.
+   Generado desde el panel el 14/9/2026, 06:56:21.
    Se puede editar a mano igual: es un archivo de texto común.
    ============================================================= */
 
@@ -42,7 +42,7 @@ const PRODUCTOS = [
     img: 'assets/img/hawas-kobra.webp',
     tono: ['#2a0c0c', '#7d2320'],
     destacado: true,
-    stock: false,
+    stock: true,
   },
   {
     id: 'hawas-black',
