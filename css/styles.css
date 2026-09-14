@@ -1,0 +1,981 @@
+/* ============================================================
+   701 PARFUM — Hoja de estilos
+   ============================================================ */
+
+:root{
+  --negro:#0b0b0d;
+  --negro-2:#111114;
+  --negro-3:#17171b;
+  --linea:rgba(255,255,255,.09);
+  --linea-fuerte:rgba(255,255,255,.18);
+  --texto:#f2efe9;
+  --texto-2:#a9a49b;
+  --oro:#c9a227;
+  --oro-claro:#e3c56a;
+  --oro-suave:rgba(201,162,39,.14);
+  --verde-wsp:#25d366;
+  --radio:14px;
+  --radio-s:8px;
+  --sombra:0 20px 50px rgba(0,0,0,.45);
+  --serif:'Cormorant Garamond', Georgia, serif;
+  --sans:'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --max:1200px;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+
+/* El atributo hidden del HTML tiene que ganarle siempre.
+   El navegador lo aplica como [hidden]{display:none}, y cualquier regla
+   nuestra que fije un display le gana: así la ficha de producto quedaba
+   invisible pero tapando la pantalla entera, y ningún botón respondía. */
+[hidden]{display:none !important;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--negro);
+  color:var(--texto);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body.no-scroll{overflow:hidden;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.15;margin:0;letter-spacing:.01em;}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 24px;}
+
+svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ---------- Botones ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:14px 30px;border-radius:100px;border:1px solid transparent;
+  font-size:.82rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  transition:.25s ease;white-space:nowrap;
+}
+.btn--gold{background:var(--oro);color:#12100a;border-color:var(--oro);}
+.btn--gold:hover{background:var(--oro-claro);border-color:var(--oro-claro);transform:translateY(-2px);}
+.btn--ghost{border-color:var(--linea-fuerte);color:var(--texto);background:transparent;}
+.btn--ghost:hover{border-color:var(--oro);color:var(--oro-claro);}
+.btn--wsp{background:var(--verde-wsp);color:#04220f;border-color:var(--verde-wsp);width:100%;}
+.btn--wsp:hover{filter:brightness(1.1);}
+.btn--block{width:100%;}
+.btn[disabled]{opacity:.45;pointer-events:none;}
+
+.icon-btn{
+  background:transparent;border:0;color:var(--texto);padding:8px;
+  display:inline-flex;align-items:center;justify-content:center;border-radius:50%;
+  transition:.2s;position:relative;
+}
+.icon-btn:hover{color:var(--oro-claro);background:rgba(255,255,255,.06);}
+
+/* ---------- Topbar ---------- */
+.topbar{background:var(--oro);color:#12100a;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;}
+.topbar__inner{display:flex;gap:10px;justify-content:center;align-items:center;padding:9px 24px;flex-wrap:wrap;text-align:center;}
+.topbar__sep{opacity:.5;}
+@media(max-width:640px){.topbar__sep{display:none;} .topbar__inner{font-size:.66rem;gap:4px;}}
+
+/* ---------- Header ---------- */
+.header{position:sticky;top:0;z-index:60;background:rgba(11,11,13,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--linea);transition:.3s;}
+.header.is-scrolled{background:rgba(11,11,13,.97);}
+.header__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:74px;}
+.logo{display:flex;align-items:baseline;gap:7px;}
+.logo__num{font-family:var(--serif);font-size:1.7rem;color:var(--oro);letter-spacing:.02em;line-height:1;}
+.logo__txt{font-size:.72rem;letter-spacing:.42em;font-weight:400;color:var(--texto);}
+.nav{display:flex;gap:30px;}
+.nav a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--texto-2);transition:.2s;position:relative;padding:4px 0;}
+.nav a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--oro);transition:.25s;}
+.nav a:hover{color:var(--texto);}
+.nav a:hover::after{width:100%;}
+.header__actions{display:flex;align-items:center;gap:4px;}
+.cart-count{
+  position:absolute;top:0;right:0;min-width:18px;height:18px;padding:0 5px;
+  background:var(--oro);color:#12100a;border-radius:100px;
+  font-size:.66rem;font-weight:600;display:grid;place-items:center;line-height:1;
+}
+.cart-count.is-zero{display:none;}
+.burger{display:none;flex-direction:column;gap:4px;width:38px;height:38px;}
+.burger span{display:block;width:18px;height:1.5px;background:currentColor;transition:.25s;}
+.burger.is-open span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+.burger.is-open span:nth-child(2){opacity:0;}
+.burger.is-open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
+
+.searchbar{border-top:1px solid var(--linea);padding:14px 0;background:var(--negro-2);}
+.searchbar input{
+  width:100%;background:transparent;border:0;border-bottom:1px solid var(--linea-fuerte);
+  color:var(--texto);font-family:var(--serif);font-size:1.4rem;padding:8px 0;outline:none;
+}
+.searchbar input::placeholder{color:var(--texto-2);font-size:1.05rem;font-family:var(--sans);}
+.searchbar input:focus{border-color:var(--oro);}
+
+@media(max-width:940px){
+  .burger{display:flex;}
+  /* El menú va anclado a la cabecera (top:100% = justo debajo), no a una
+     altura fija: así acompaña solo si la cabecera cambia de alto.
+     El `visibility` es la garantía de que no asome: esconderlo sólo
+     moviéndolo depende de su propia altura, y con el menú largo el borde
+     de abajo quedaba a la vista por encima de la cabecera. */
+  .nav{
+    position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;
+    background:var(--negro-2);border-bottom:1px solid var(--linea);
+    padding:8px 24px 24px;
+    transform:translateY(-100%);visibility:hidden;
+    transition:transform .35s cubic-bezier(.4,0,.2,1),
+               visibility 0s linear .35s;
+  }
+  .nav.is-open{
+    transform:translateY(0);visibility:visible;
+    transition:transform .35s cubic-bezier(.4,0,.2,1),
+               visibility 0s linear 0s;
+  }
+  .nav a{padding:14px 0;border-bottom:1px solid var(--linea);font-size:.9rem;}
+}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:110px 0 96px;overflow:hidden;}
+.hero__bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(900px 520px at 78% 18%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(700px 500px at 8% 88%, rgba(120,90,200,.14), transparent 60%),
+    linear-gradient(180deg,#0b0b0d 0%,#111114 100%);
+}
+.hero__bg::after{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size:22px 22px;mask-image:linear-gradient(180deg,#000,transparent 78%);
+}
+.hero__inner{position:relative;text-align:center;}
+.hero__eyebrow{color:var(--oro);font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;margin:0 0 22px;}
+.hero__title{font-size:clamp(3rem,9vw,6.2rem);letter-spacing:-.01em;}
+.hero__title em{font-style:italic;color:var(--oro-claro);}
+.hero__sub{max-width:560px;margin:24px auto 0;color:var(--texto-2);font-size:1.05rem;}
+.hero__cta{display:flex;gap:14px;justify-content:center;margin-top:38px;flex-wrap:wrap;}
+.hero__badges{
+  list-style:none;display:flex;gap:32px;justify-content:center;flex-wrap:wrap;
+  margin:56px 0 0;padding:0;color:var(--texto-2);font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;
+}
+
+/* ---------- Beneficios ---------- */
+.beneficios{border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);background:var(--negro-2);}
+.beneficios__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;padding:0 24px;}
+.beneficio{padding:44px 26px;position:relative;}
+.beneficio + .beneficio::before{content:'';position:absolute;left:0;top:28px;bottom:28px;width:1px;background:var(--linea);}
+/* Medallón: el ícono va con trazo de degradado dorado dentro de un aro
+   fino, con un resplandor suave detrás. El degradado es lo que le da la
+   textura de metal en vez de un color plano. */
+.beneficio__ico{margin-bottom:18px;line-height:0;}
+.beneficio__ico svg{
+  width:62px;height:62px;
+  transition:transform var(--t-medio) var(--ease-entra),
+             filter var(--t-medio) var(--ease-entra);
+}
+.beneficio:hover .beneficio__ico svg{
+  transform:translateY(-3px);
+  filter:drop-shadow(0 6px 14px rgba(201,162,39,.28)) brightness(1.12);
+}
+.beneficio h3{font-size:1.3rem;margin-bottom:8px;}
+.beneficio p{margin:0;color:var(--texto-2);font-size:.9rem;}
+@media(max-width:860px){
+  .beneficios__grid{grid-template-columns:1fr 1fr;}
+  .beneficio:nth-child(odd) + .beneficio::before{display:block;}
+  .beneficio:nth-child(3)::before,.beneficio:nth-child(3){border-top:1px solid var(--linea);}
+  .beneficio:nth-child(4){border-top:1px solid var(--linea);}
+}
+@media(max-width:520px){
+  .beneficios__grid{grid-template-columns:1fr;}
+  .beneficio{padding:28px 0;border-top:1px solid var(--linea);}
+  .beneficio:first-child{border-top:0;}
+  .beneficio + .beneficio::before{display:none;}
+}
+
+/* ---------- Secciones ---------- */
+.sec-head{text-align:center;margin-bottom:46px;}
+.sec-eyebrow{color:var(--oro);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;margin:0 0 14px;}
+.sec-title{font-size:clamp(2.2rem,5vw,3.4rem);}
+.sec-sub{color:var(--texto-2);margin:14px auto 0;max-width:520px;font-size:.95rem;}
+
+.catalogo{padding:96px 0;}
+
+/* ---------- Filtros ---------- */
+.filtros{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:14px;}
+.chips{display:flex;gap:10px;flex-wrap:wrap;}
+.chip{
+  background:transparent;border:1px solid var(--linea-fuerte);color:var(--texto-2);
+  padding:9px 22px;border-radius:100px;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;transition:.22s;
+}
+.chip:hover{color:var(--texto);border-color:var(--texto-2);}
+.chip.is-active{background:var(--oro);border-color:var(--oro);color:#12100a;}
+.select{display:flex;align-items:center;gap:10px;color:var(--texto-2);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;}
+.select select{
+  background:var(--negro-3);color:var(--texto);border:1px solid var(--linea-fuerte);
+  border-radius:100px;padding:9px 16px;font-family:inherit;font-size:.78rem;outline:none;cursor:pointer;
+}
+.resultado-info{color:var(--texto-2);font-size:.82rem;margin:0 0 26px;}
+
+/* ---------- Grid de productos ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:24px;}
+.card{
+  background:var(--negro-2);border:1px solid var(--linea);border-radius:var(--radio);
+  overflow:hidden;display:flex;flex-direction:column;transition:.3s ease;position:relative;
+}
+.card:hover{transform:translateY(-6px);border-color:rgba(201,162,39,.45);box-shadow:var(--sombra);}
+/* Las fotos de perfume son verticales: la tarjeta las acompaña en vez de
+   forzarlas a un cuadrado que le corta la cabeza al frasco. */
+/* Las fotos vienen en 9:16 y la tarjeta las acompaña en esa forma:
+   entran completas, sin recortes y a buen tamaño. */
+.card__media{position:relative;aspect-ratio:9/16;overflow:hidden;background:var(--negro-3);perspective:900px;}
+/* Detrás va la misma foto, ampliada y desenfocada: así cualquier proporción
+   llena el recuadro sin que haya que recortar el producto. */
+.card__media::before{
+  content:'';position:absolute;inset:0;
+  background-image:var(--foto);background-size:cover;background-position:center;
+  filter:blur(26px) saturate(1.3) brightness(.5);
+  transform:scale(1.25);
+}
+.card__media img{position:relative;width:100%;height:100%;object-fit:contain;}
+.card__media svg{position:relative;width:100%;height:100%;object-fit:cover;}
+.card__tag{
+  position:absolute;top:12px;left:12px;
+  background:rgba(11,11,13,.82);backdrop-filter:blur(4px);color:var(--oro-claro);
+  border:1px solid rgba(201,162,39,.5);
+  font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  padding:5px 11px;border-radius:100px;
+}
+.card__quick{
+  position:absolute;inset:auto 12px 12px;background:rgba(11,11,13,.86);backdrop-filter:blur(6px);
+  border:1px solid var(--linea-fuerte);color:var(--texto);border-radius:100px;padding:10px;
+  font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  opacity:0;transform:translateY(8px);transition:.25s;
+}
+.card:hover .card__quick{opacity:1;transform:translateY(0);}
+.card__body{padding:20px;display:flex;flex-direction:column;gap:9px;flex:1;}
+.card__cat{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);}
+.card__name{font-size:1.35rem;}
+.card__fam{font-size:.82rem;color:var(--texto-2);margin:0;}
+.card__notas{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px;}
+.nota{font-size:.66rem;letter-spacing:.06em;color:var(--texto-2);border:1px solid var(--linea);border-radius:100px;padding:3px 10px;}
+.card__foot{margin-top:auto;padding-top:16px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;}
+.card__precio{display:flex;flex-direction:column;line-height:1.25;}
+.card__precio small{color:var(--texto-2);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;}
+.card__precio strong{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--texto);}
+.card__add{
+  background:var(--oro-suave);border:1px solid rgba(201,162,39,.4);color:var(--oro-claro);
+  border-radius:100px;padding:10px 18px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;transition:.22s;
+}
+.card__add:hover{background:var(--oro);color:#12100a;}
+
+.vacio{text-align:center;padding:70px 0;color:var(--texto-2);display:flex;flex-direction:column;align-items:center;gap:20px;}
+
+/* ---------- Nosotros ---------- */
+.nosotros{padding:96px 0;background:var(--negro-2);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);}
+.nosotros__inner{max-width:720px;margin:0 auto;text-align:center;}
+.nosotros__txt p{color:var(--texto-2);margin-left:auto;margin-right:auto;}
+.nosotros__txt .btn{margin-top:14px;}
+/* ---------- FAQ ---------- */
+.faq{padding:96px 0;}
+.faq__list{max-width:760px;margin:0 auto;}
+.faq details{border-bottom:1px solid var(--linea);padding:6px 0;}
+.faq summary{
+  cursor:pointer;list-style:none;padding:20px 0;font-family:var(--serif);font-size:1.3rem;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;transition:.2s;
+}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:'+';color:var(--oro);font-size:1.5rem;transition:.25s;font-family:var(--sans);font-weight:300;}
+.faq details[open] summary::after{transform:rotate(45deg);}
+.faq summary:hover{color:var(--oro-claro);}
+.faq details p{margin:0 0 20px;color:var(--texto-2);max-width:640px;}
+
+/* ---------- CTA final ---------- */
+.cta-final{
+  padding:96px 0;text-align:center;
+  background:radial-gradient(700px 320px at 50% 0%, rgba(201,162,39,.18), transparent 68%),var(--negro-2);
+  border-top:1px solid var(--linea);
+}
+.cta-final h2{font-size:clamp(2rem,5vw,3rem);}
+.cta-final p{color:var(--texto-2);margin:14px auto 32px;max-width:480px;}
+
+/* ---------- Footer ---------- */
+.footer{background:var(--negro);border-top:1px solid var(--linea);padding:64px 0 26px;}
+.footer__inner{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;}
+.footer__brand p{color:var(--texto-2);font-family:var(--serif);font-style:italic;font-size:1.1rem;margin:14px 0 0;}
+.footer__col h4{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--texto);margin-bottom:16px;font-family:var(--sans);font-weight:500;}
+.footer__col a{display:block;color:var(--texto-2);font-size:.88rem;padding:5px 0;transition:.2s;}
+.footer__col a:hover{color:var(--oro-claro);}
+.footer__bottom{
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  border-top:1px solid var(--linea);margin-top:46px;padding-top:22px;
+  color:var(--texto-2);font-size:.76rem;
+}
+@media(max-width:760px){.footer__inner{grid-template-columns:1fr 1fr;gap:34px;}}
+
+/* ---------- Overlay ---------- */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(3px);z-index:80;opacity:0;transition:.3s;}
+.overlay.is-visible{opacity:1;}
+
+/* ---------- Carrito ---------- */
+.cart{
+  position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);z-index:90;
+  background:var(--negro-2);border-left:1px solid var(--linea);
+  display:flex;flex-direction:column;transform:translateX(100%);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.cart.is-open{transform:translateX(0);}
+.cart__head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid var(--linea);}
+.cart__head h3{font-size:1.5rem;}
+.cart__body{flex:1;overflow-y:auto;padding:18px 24px;}
+.cart__foot{border-top:1px solid var(--linea);padding:20px 24px 24px;background:var(--negro-3);}
+
+.cart-item{display:grid;grid-template-columns:74px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--linea);}
+.cart-item__media{border-radius:var(--radio-s);overflow:hidden;background:var(--negro-3);aspect-ratio:1/1;}
+.cart-item__media img,.cart-item__media svg{width:100%;height:100%;object-fit:cover;}
+.cart-item__name{font-family:var(--serif);font-size:1.1rem;line-height:1.25;}
+.cart-item__size{color:var(--texto-2);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;margin:3px 0 10px;}
+.cart-item__row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.qty{display:flex;align-items:center;border:1px solid var(--linea-fuerte);border-radius:100px;overflow:hidden;}
+.qty button{background:transparent;border:0;color:var(--texto);width:30px;height:30px;font-size:1rem;line-height:1;transition:.2s;}
+.qty button:hover{background:rgba(255,255,255,.08);color:var(--oro-claro);}
+.qty span{min-width:26px;text-align:center;font-size:.88rem;}
+.cart-item__precio{font-family:var(--serif);font-size:1.15rem;font-weight:600;}
+.cart-item__del{background:transparent;border:0;color:var(--texto-2);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 0;transition:.2s;}
+.cart-item__del:hover{color:#e06a6a;}
+
+.cart-vacio{text-align:center;padding:70px 20px;color:var(--texto-2);display:flex;flex-direction:column;gap:18px;align-items:center;}
+.cart-vacio__ico{font-size:2.4rem;opacity:.5;}
+
+.cart-line{display:flex;justify-content:space-between;margin-bottom:9px;font-size:.9rem;color:var(--texto-2);}
+.cart-line--total{
+  color:var(--texto);font-family:var(--serif);font-size:1.55rem;font-weight:600;
+  border-top:1px solid var(--linea);padding-top:14px;margin:14px 0 18px;
+}
+.cart-envio-nota{font-size:.76rem;color:var(--oro-claro);margin:0 0 14px;}
+.cart-legal{font-size:.72rem;color:var(--texto-2);text-align:center;margin:12px 0 0;line-height:1.5;}
+
+/* ---------- Modal producto ---------- */
+.modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);opacity:0;transition:.25s;}
+.modal.is-open{opacity:1;}
+.modal__box{
+  position:relative;width:min(880px,100%);max-height:88vh;overflow-y:auto;
+  background:var(--negro-2);border:1px solid var(--linea-fuerte);border-radius:var(--radio);box-shadow:var(--sombra);
+  transform:translateY(18px) scale(.98);transition:.3s;
+}
+.modal.is-open .modal__box{transform:none;}
+.modal__close{position:absolute;top:12px;right:12px;z-index:2;background:rgba(11,11,13,.7);}
+.modal__grid{display:grid;grid-template-columns:1fr 1fr;}
+.modal__media{position:relative;background:var(--negro-3);aspect-ratio:9/16;overflow:hidden;}
+.modal__media::before{
+  content:'';position:absolute;inset:0;
+  background-image:var(--foto);background-size:cover;background-position:center;
+  filter:blur(30px) saturate(1.3) brightness(.5);
+  transform:scale(1.25);
+}
+.modal__media img{position:relative;width:100%;height:100%;object-fit:contain;}
+.modal__media svg{position:relative;width:100%;height:100%;object-fit:cover;}
+.modal__info{padding:38px 34px;display:flex;flex-direction:column;gap:14px;}
+.modal__cat{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--oro);}
+.modal__nombre{font-size:2.1rem;}
+.modal__desc{color:var(--texto-2);font-size:.94rem;margin:0;}
+.modal__dato{display:flex;justify-content:space-between;font-size:.84rem;color:var(--texto-2);border-bottom:1px solid var(--linea);padding-bottom:9px;}
+.modal__dato b{color:var(--texto);font-weight:500;}
+.modal__label{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--texto-2);margin-bottom:-4px;}
+.tallas{display:flex;gap:9px;flex-wrap:wrap;}
+.talla{
+  background:transparent;border:1px solid var(--linea-fuerte);color:var(--texto-2);
+  border-radius:100px;padding:9px 18px;font-size:.8rem;transition:.2s;
+}
+.talla:hover{border-color:var(--texto-2);color:var(--texto);}
+.talla.is-active{background:var(--oro);border-color:var(--oro);color:#12100a;}
+.modal__precio{font-family:var(--serif);font-size:2.2rem;font-weight:600;line-height:1;}
+@media(max-width:760px){
+  .modal__grid{grid-template-columns:1fr;}
+  .modal__media{aspect-ratio:4/3;}
+  .modal__info{padding:26px 22px 30px;}
+}
+
+/* ---------- FAB WhatsApp ---------- */
+.fab-wsp{
+  position:fixed;right:20px;bottom:20px;z-index:70;width:54px;height:54px;border-radius:50%;
+  background:var(--verde-wsp);display:grid;place-items:center;
+  box-shadow:0 10px 26px rgba(37,211,102,.35);transition:.25s;
+}
+.fab-wsp svg{width:30px;height:30px;fill:#04220f;stroke:none;}
+.fab-wsp:hover{transform:scale(1.08);}
+
+/* ---------- Toast ---------- */
+.toast{
+  position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);z-index:120;
+  background:var(--negro-3);border:1px solid var(--oro);color:var(--texto);
+  padding:13px 24px;border-radius:100px;font-size:.85rem;box-shadow:var(--sombra);
+  opacity:0;transition:.28s;pointer-events:none;max-width:calc(100% - 32px);text-align:center;
+}
+.toast.is-visible{opacity:1;transform:translate(-50%,0);}
+
+/* ---------- Animación de entrada ---------- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.is-in{opacity:1;transform:none;}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important;}
+  html{scroll-behavior:auto;}
+  .reveal{opacity:1;transform:none;}
+}
+
+/* ============================================================
+   HERO PARALLAX (GSAP + ScrollTrigger + Lenis)
+   Estructura: .parallax__header mide 220vh y .parallax__visuals
+   queda sticky; las capas se separan a distinta velocidad.
+   ============================================================ */
+.parallax{
+  position:relative;background:var(--negro);
+  /* El hero arranca pegado al borde de arriba y la cabecera flota encima:
+     si no, sus últimos píxeles (el chip y el cursor de scroll) quedan
+     fuera de pantalla mientras no scrolleás. */
+  margin-top:calc(-1 * var(--tope, 107px));
+}
+.parallax__header{height:220vh;position:relative;}
+.parallax__visuals{
+  position:sticky;top:0;height:100vh;overflow:hidden;
+  background:#000;
+}
+/* El agujero negro: ocupa todo el fondo del hero */
+#hero-agujero{
+  position:absolute;inset:0;width:100%;height:100%;
+  display:block;z-index:0;
+  opacity:0;transition:opacity 1.1s var(--ease-entra,ease);
+}
+#hero-agujero.esta-listo{opacity:1;}
+.parallax__black-line-overflow{
+  position:absolute;left:0;right:0;bottom:-2px;height:90px;z-index:6;pointer-events:none;
+  background:linear-gradient(180deg,transparent,var(--negro) 86%);
+}
+.parallax__layers{position:absolute;inset:0;display:grid;place-items:center;}
+.p-layer{
+  position:absolute;inset:0;display:grid;place-items:center;
+  will-change:transform;pointer-events:none;
+}
+.p-layer svg,.p-layer img{width:min(92vw,var(--max));height:auto;max-height:100%;object-fit:contain;}
+.p-layer--glow svg{opacity:.85;}
+
+/* Capa 1 — halo y partículas del fondo */
+.p-layer--glow{z-index:1;}
+/* Capa 2 — bruma / ondas doradas */
+.p-layer--mist{z-index:2;}
+/* Capa 3 — título */
+.parallax__layer-title{
+  position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-start;text-align:center;
+  padding:calc(var(--tope, 107px) + 1.4vh) 24px 0;will-change:transform;
+}
+/* Halo oscuro detrás del texto. El disco de gas pasa justo por acá y sin
+   esto el dorado del título se confunde con el dorado del gas. */
+.parallax__layer-title::before{
+  content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);
+  width:min(160vw,1600px);height:62vh;pointer-events:none;z-index:0;
+  background:radial-gradient(closest-side,
+    rgba(3,3,5,.92) 0%, rgba(3,3,5,.78) 44%, rgba(3,3,5,.36) 72%, transparent 100%);
+}
+.parallax__layer-title > *{position:relative;z-index:1;}
+/* ============================================================
+   LOGOTIPO DEL INICIO
+   El disco de gas pasa justo por detrás del título, y dorado
+   sobre dorado no se lee. Van tres cosas: una sombra oscura
+   detrás del bloque de texto, un degradado metálico con un
+   destello que lo recorre, y el nombre partido en dos alturas
+   para que se lea como marca y no como una frase.
+   ============================================================ */
+.marca{
+  position:relative;margin:0;line-height:1;
+  display:flex;flex-direction:column;align-items:center;gap:clamp(4px,0.9vw,13px);
+}
+
+.marca__num{
+  font-family:var(--serif);
+  font-size:max(4.8rem, min(17vw, 17.5vh, 13rem));
+  font-weight:600;line-height:.86;letter-spacing:.005em;
+  margin-top:-.07em;
+  filter:drop-shadow(0 3px 16px rgba(0,0,0,.92)) drop-shadow(0 0 44px rgba(0,0,0,.65));
+}
+
+/* Todo el logotipo es dorado. El destello es una franja clara y angosta
+   que lo recorre cada tanto: el oro quieto se ve chato, el que tiene un
+   reflejo que pasa se ve como metal. */
+.marca__num,.marca__txt{
+  background:linear-gradient(100deg,
+    #6f5411 0%, #b8942a 20%, #e6cb75 38%,
+    #fff8e6 46%, #fff8e6 50%,
+    #e6cb75 58%, #b8942a 78%, #6f5411 100%);
+  background-size:280% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+  animation:brilloMarca 8s ease-in-out infinite;
+}
+.marca__txt{animation-delay:.22s;}
+
+@keyframes brilloMarca{
+  0%   {background-position:145% 0;}
+  30%  {background-position:-45% 0;}
+  100% {background-position:-45% 0;}
+}
+
+.marca__pie{
+  display:flex;align-items:center;gap:clamp(12px,2.2vw,26px);
+  width:min(88vw,var(--max));
+  filter:drop-shadow(0 2px 12px rgba(0,0,0,.9));
+}
+.marca__pie i{
+  flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(240,214,140,.9));
+}
+.marca__pie i:last-child{
+  background:linear-gradient(90deg,rgba(240,214,140,.9),transparent);
+}
+.marca__txt{
+  font-family:var(--serif);font-style:italic;
+  font-size:max(1.7rem, min(5.4vw, 5.4vh, 3.4rem));
+  letter-spacing:.05em;white-space:nowrap;
+  padding:0 .12em;
+}
+
+.parallax__sub{
+  color:#d8d2c6;font-size:clamp(.9rem,2vw,1.1rem);margin:15px 0 0;
+  letter-spacing:.08em;max-width:560px;
+  text-shadow:0 2px 14px rgba(0,0,0,.95), 0 0 30px rgba(0,0,0,.8);
+}
+/* Capa 4 — los tres frascos en primer plano, uno al lado del otro */
+.p-layer--bottle{
+  z-index:4;display:flex;flex-direction:row;align-items:flex-end;
+  justify-content:center;flex-wrap:nowrap;
+  gap:clamp(8px,2.2vw,22px);padding-bottom:9vh;
+}
+.p-layer__frasco{display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;}
+.parallax__fade{
+  position:absolute;inset:auto 0 0 0;height:32%;z-index:5;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(11,11,13,.7) 62%,var(--negro));
+}
+.parallax__scrollcue{
+  position:absolute;left:50%;bottom:1.5vh;transform:translateX(-50%);z-index:7;
+  color:var(--texto-2);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+}
+.parallax__scrollcue i{display:block;width:1px;height:26px;background:linear-gradient(180deg,var(--oro),transparent);animation:cue 2.2s ease-in-out infinite;}
+@keyframes cue{0%,100%{opacity:.25;transform:scaleY(.6);transform-origin:top;}50%{opacity:1;transform:scaleY(1);}}
+
+/* Bloque de contenido debajo del parallax */
+.parallax__content{
+  position:relative;z-index:8;text-align:center;padding:70px 0 96px;background:var(--negro);
+}
+.parallax__content .hero__eyebrow{margin-bottom:18px;}
+.parallax__content h2{font-size:clamp(2rem,5vw,3.2rem);}
+.parallax__content h2 em{font-style:italic;color:var(--oro-claro);}
+.parallax__content p{color:var(--texto-2);max-width:560px;margin:18px auto 0;}
+
+@media(max-width:640px){
+  .parallax__header{height:190vh;}
+  .parallax__layer-title{padding-top:calc(var(--tope, 107px) + 0.8vh);}
+  .p-layer--bottle{padding-bottom:11vh;gap:8px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .parallax__header{height:100vh;}
+  .parallax__scrollcue i{animation:none;}
+}
+
+/* ---------- Canal Instagram (cuando no hay WhatsApp cargado) ---------- */
+.btn--ig{
+  background:linear-gradient(95deg,#f9ce34 0%,#ee2a7b 48%,#6228d7 100%);
+  color:#fff;border-color:transparent;width:100%;
+}
+.btn--ig:hover{filter:brightness(1.08);}
+.fab-wsp.fab--ig{
+  background:linear-gradient(135deg,#f9ce34 0%,#ee2a7b 52%,#6228d7 100%);
+  box-shadow:0 10px 26px rgba(238,42,123,.38);
+}
+.fab-wsp.fab--ig svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.7;}
+
+/* ---------- Los tres frascos del hero (secuencia movida por el scroll) ----------
+   .hero-frasco-lienzo es el <canvas> (los tres, negro/bianco/scarlet).
+   .hero-frasco-foto es la <img> de respaldo mientras cargan los cuadros;
+   --principal es el negro (más grande), --lateral son bianco y scarlet. */
+.hero-frasco-lienzo{
+  display:block;opacity:0;pointer-events:auto;cursor:pointer;
+  transition:opacity var(--t-lento,420ms) var(--ease-entra,ease);
+  filter:drop-shadow(0 30px 50px rgba(0,0,0,.85)) drop-shadow(0 0 22px rgba(0,0,0,.6));
+}
+.hero-frasco-lienzo.esta-listo{opacity:1;}
+.hero-frasco-lienzo:focus-visible{outline:2px solid var(--oro);outline-offset:8px;border-radius:12px;}
+
+.p-layer--bottle .hero-frasco-foto{
+  display:block;width:auto;
+  filter:drop-shadow(0 36px 56px rgba(0,0,0,.65));
+}
+.p-layer--bottle .hero-frasco-foto--principal{height:min(54vh,440px);}
+.p-layer--bottle .hero-frasco-foto--lateral{height:min(37vh,300px);filter:drop-shadow(0 26px 40px rgba(0,0,0,.6));}
+
+@media(max-width:700px){
+  .p-layer--bottle .hero-frasco-foto--principal{height:min(40vh,300px);}
+  .p-layer--bottle .hero-frasco-foto--lateral{height:min(26vh,180px);}
+}
+
+/* Botones de ficha de los frascos laterales: un toque más chicos que el del negro */
+.p-layer__frasco--bianco .frasco-ficha,.p-layer__frasco--scarlet .frasco-ficha{
+  font-size:.56rem;padding:6px 13px;
+}
+
+/* ============================================================
+   HERO INMERSIVO — atmósfera y entrada
+   ============================================================ */
+
+
+
+/* Viñeta: cierra los bordes y empuja la mirada al centro */
+.parallax__vineta{
+  position:absolute;inset:0;z-index:5;pointer-events:none;
+  background:
+    /* cama oscura arriba, para que el texto no pelee con el gas */
+    linear-gradient(180deg, rgba(5,5,7,.78) 0%, rgba(5,5,7,.42) 24%, transparent 44%),
+    radial-gradient(120% 92% at 50% 46%, transparent 52%, rgba(5,5,7,.34) 82%, rgba(5,5,7,.72) 100%);
+}
+
+/* Entrada escalonada */
+.entra{
+  opacity:0;transform:translateY(26px);
+  filter:blur(6px);
+  animation:entraArriba 1.25s cubic-bezier(.16,.8,.24,1) var(--retraso,0s) forwards;
+}
+@keyframes entraArriba{
+  to{opacity:1;transform:none;filter:blur(0);}
+}
+
+/* El puntero mueve las capas: profundidad real, no un fondo plano */
+.p-layer--glow svg,.p-layer--mist svg{transition:transform .1s linear;}
+
+/* Cursor de scroll un poco más presente */
+.parallax__scrollcue{gap:9px;letter-spacing:.34em;}
+.parallax__scrollcue i{height:26px;}
+
+@media(prefers-reduced-motion:reduce){
+  .entra{opacity:1;transform:none;filter:none;animation:none;}
+  .marca__num{animation:none;background-position:-35% 0;}
+}
+
+/* ============================================================
+   MOVIMIENTO — según el enfoque de Emil Kowalski
+   Reglas: curvas de salida (nunca lineales), duraciones cortas,
+   sólo transform y opacity, y respuesta al gesto.
+   ============================================================ */
+:root{
+  /* La curva de Vaul/Sonner: arranca rápido y frena largo */
+  --ease-suave:cubic-bezier(.32,.72,0,1);
+  /* Entrada elegante, sin rebote */
+  --ease-entra:cubic-bezier(.16,1,.3,1);
+  /* Salida: al revés, arranca lento y se va rápido */
+  --ease-sale:cubic-bezier(.4,0,1,1);
+  --t-rapido:150ms;
+  --t-medio:260ms;
+  --t-lento:420ms;
+}
+
+/* ---------- Respuesta al toque: todo lo clickeable se hunde ---------- */
+.btn{transition:background var(--t-rapido) ease,color var(--t-rapido) ease,
+     border-color var(--t-rapido) ease,transform var(--t-rapido) var(--ease-entra);}
+.btn--gold:hover{transform:translateY(-2px);}
+.btn:active{transform:scale(.97);}
+.icon-btn{transition:color var(--t-rapido) ease,background var(--t-rapido) ease,
+          transform var(--t-rapido) var(--ease-entra);}
+.icon-btn:active{transform:scale(.9);}
+.chip{transition:color var(--t-rapido) ease,background var(--t-rapido) ease,
+      border-color var(--t-rapido) ease,transform var(--t-rapido) var(--ease-entra);}
+.chip:active{transform:scale(.96);}
+.card__add,.talla,.qty button{transition:all var(--t-rapido) var(--ease-entra);}
+.card__add:active,.talla:active{transform:scale(.95);}
+.qty button:active{transform:scale(.85);}
+
+/* ---------- Tarjetas ---------- */
+.card{transition:transform var(--t-medio) var(--ease-entra),
+      border-color var(--t-medio) ease,box-shadow var(--t-medio) ease;}
+.card:active{transform:translateY(-4px) scale(.995);}
+.card__quick{transition:opacity var(--t-medio) var(--ease-entra),
+             transform var(--t-medio) var(--ease-entra);}
+
+/* ---------- Aparición al scrollear: sube y se enfoca ---------- */
+.reveal{opacity:0;transform:translateY(14px) scale(.99);filter:blur(4px);
+        transition:opacity var(--t-lento) var(--ease-entra),
+                   transform var(--t-lento) var(--ease-entra),
+                   filter var(--t-lento) var(--ease-entra);}
+.reveal.is-in{opacity:1;transform:none;filter:blur(0);}
+
+/* ---------- La foto "gira" al aparecer ----------
+   La mayoría de los perfumes solo tienen una foto plana (no el video
+   girando como Veneno), así que acá se simula el giro con un tilt 3D:
+   la foto entra de perfil y se acomoda de frente, una sola vez, cuando
+   la tarjeta aparece en pantalla. animation-play-state la mantiene
+   congelada en el cuadro inicial hasta que .is-in llega (mismo momento
+   en que el resto de la tarjeta se revela). */
+@keyframes cardFotoGira{
+  0%{transform:rotateY(-28deg) rotateX(3deg) scale(.95);}
+  58%{transform:rotateY(8deg) rotateX(-1deg) scale(1.015);}
+  100%{transform:rotateY(0deg) rotateX(0deg) scale(1);}
+}
+.card__media img{
+  animation:cardFotoGira 1.15s var(--ease-suave,ease) 1;
+  animation-play-state:paused;
+  transform-style:preserve-3d;
+}
+.card.is-in .card__media img{animation-play-state:running;}
+
+/* ---------- Ficha de producto ---------- */
+.modal{transition:opacity var(--t-medio) var(--ease-entra);}
+.modal__box{transform:translateY(10px) scale(.97);
+            transition:transform var(--t-medio) var(--ease-suave),
+                       opacity var(--t-medio) var(--ease-entra);}
+
+/* ============================================================
+   AVISOS APILADOS  (estilo Sonner)
+   ============================================================ */
+.avisos{
+  position:fixed;z-index:130;right:24px;bottom:24px;
+  transition:right var(--t-lento) var(--ease-suave);
+  width:min(340px,calc(100vw - 32px));height:0;
+  list-style:none;margin:0;padding:0;
+}
+.aviso{
+  position:absolute;right:0;bottom:0;left:0;
+  display:flex;align-items:center;gap:11px;
+  padding:14px 16px;border-radius:13px;
+  background:rgba(23,23,27,.92);backdrop-filter:blur(14px);
+  border:1px solid var(--linea-fuerte);
+  box-shadow:0 12px 34px rgba(0,0,0,.5);
+  color:var(--texto);font-size:.87rem;line-height:1.35;
+  transform-origin:bottom center;cursor:grab;touch-action:none;
+  user-select:none;-webkit-user-select:none;
+  transition:transform var(--t-lento) var(--ease-suave),
+             opacity var(--t-medio) var(--ease-entra);
+}
+.aviso:active{cursor:grabbing;}
+.aviso__ok{
+  flex:0 0 22px;height:22px;border-radius:50%;
+  background:var(--oro-suave);color:var(--oro-claro);
+  display:grid;place-items:center;font-size:.7rem;
+}
+.aviso__txt{flex:1;}
+
+/* Con el panel abierto, los avisos se corren a su izquierda */
+body.con-panel .avisos{right:calc(min(420px, 100vw) + 24px);}
+
+@media(max-width:700px){
+  .avisos{left:14px;right:14px;bottom:14px;width:auto;}
+  body.con-panel .avisos{right:14px;}
+}
+
+/* ============================================================
+   PANEL DEL CARRITO  (estilo Vaul)
+   ============================================================ */
+.cart{transition:transform var(--t-lento) var(--ease-suave);}
+.cart--arrastrando{transition:none;}
+.cart__agarradera{display:none;}
+
+/* El fondo retrocede mientras la hoja está abierta */
+#app{
+  transform-origin:center top;
+  transition:transform var(--t-lento) var(--ease-suave);
+}
+
+@media(max-width:700px){
+  /* En celular deja de ser un panel lateral: es una hoja que sube */
+  .cart{
+    top:auto;left:0;right:0;bottom:0;width:100%;
+    max-height:88vh;height:auto;
+    border-left:0;border-top:1px solid var(--linea-fuerte);
+    border-radius:20px 20px 0 0;
+    transform:translateY(100%);
+    box-shadow:0 -18px 50px rgba(0,0,0,.55);
+    touch-action:none;
+  }
+  .cart.is-open{transform:translateY(0);}
+  .cart__agarradera{
+    display:flex;justify-content:center;padding:10px 0 2px;flex:0 0 auto;
+  }
+  .cart__agarradera span{
+    display:block;width:38px;height:4px;border-radius:100px;
+    background:var(--linea-fuerte);
+  }
+  .cart__head{padding-top:10px;}
+  .cart__body{overscroll-behavior:contain;touch-action:pan-y;}
+
+  #app.app--atras{
+    transform:scale(calc(1 - .045 * var(--retroceso, 1)))
+              translateY(calc(10px * var(--retroceso, 1)));
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .aviso,.cart,#app,.modal__box{transition-duration:.01ms !important;}
+}
+
+/* ---------- Legibilidad sobre el disco de gas ----------
+   El texto del hero cae encima de la parte más brillante del disco,
+   así que lleva su propia sombra en vez de depender del fondo. */
+.parallax__layer-title .hero__eyebrow,
+.parallax__sub,
+.parallax__scrollcue{
+  text-shadow:0 2px 14px rgba(0,0,0,.9), 0 0 34px rgba(0,0,0,.75);
+}
+.marca__pie{
+  filter:drop-shadow(0 3px 14px rgba(0,0,0,.9)) drop-shadow(0 0 34px rgba(0,0,0,.6));
+}
+
+/* ---------- Los frascos del inicio son productos: se pueden abrir ----------
+   (el pointer-events/cursor/focus de los <canvas> vive en .hero-frasco-lienzo) */
+.frasco-ficha{
+  flex:0 0 auto;pointer-events:auto;white-space:nowrap;
+  background:rgba(11,11,13,.55);backdrop-filter:blur(8px);
+  border:1px solid rgba(201,162,39,.42);color:var(--oro-claro);
+  border-radius:100px;padding:7px 18px;
+  font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;
+  transition:all var(--t-rapido) var(--ease-entra);
+}
+.frasco-ficha:hover{background:var(--oro);border-color:var(--oro);color:#12100a;}
+.frasco-ficha:active{transform:scale(.96);}
+
+.parallax__scrollcue{
+  transition:color var(--t-rapido) ease, opacity var(--t-medio) var(--ease-entra);
+}
+/* Es un aviso de "podés bajar": una vez que bajás, sobra — y además
+   se cruzaba con el chip del producto al moverse las capas. */
+body.ya-scrolleo .parallax__scrollcue{opacity:0;pointer-events:none;}
+.parallax__scrollcue:hover{color:var(--oro-claro);}
+
+@media(max-width:700px){
+  .frasco-ficha{font-size:.58rem;padding:6px 14px;}
+}
+/* En pantallas muy angostas los tres botones (negro + bianco + scarlet)
+   no entran juntos: se esconde "· French Avenue" del negro, que ya se
+   sobreentiende, y se achican un poco más los tres. */
+@media(max-width:400px){
+  .frasco-ficha{font-size:.53rem;padding:5px 11px;}
+  .frasco-ficha__marca{display:none;}
+}
+
+/* ============================================================
+   TARJETA DE PRODUCTO — al pasar el mouse
+   Sólo en equipos con mouse de verdad: en una pantalla táctil el
+   :hover se queda pegado después de tocar, y se ve como un error.
+   ============================================================ */
+@media (hover:hover) and (pointer:fine){
+
+  /* La foto se acerca despacio. Lento a propósito: rápido parece un salto. */
+  .card__media img{
+    position:relative;z-index:1;
+    transition:transform .75s var(--ease-entra);
+  }
+  .card:hover .card__media img{transform:scale(1.055);}
+
+  /* Un destello cruza la foto una sola vez, como la luz sobre el vidrio
+     de un frasco. Es lo que le da el aire de vidriera. */
+  .card__media::after{
+    content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(104deg,
+      transparent 38%,
+      rgba(255,244,214,.16) 47%,
+      rgba(255,244,214,.05) 53%,
+      transparent 64%);
+    transform:translateX(-115%);
+    transition:transform .9s var(--ease-suave);
+  }
+  .card:hover .card__media::after{transform:translateX(115%);}
+
+  /* El botón queda por encima del destello */
+  .card__quick{z-index:3;}
+
+  /* El nombre pasa a dorado y el precio se afirma */
+  .card__name{transition:color var(--t-medio) var(--ease-entra);}
+  .card:hover .card__name{color:var(--oro-claro);}
+
+  /* Una línea dorada crece bajo el nombre */
+  .card__body{position:relative;}
+  .card__body::before{
+    content:'';position:absolute;left:20px;top:0;height:1px;width:0;
+    background:linear-gradient(90deg,var(--oro),transparent);
+    transition:width .55s var(--ease-suave);
+  }
+  .card:hover .card__body::before{width:calc(100% - 40px);}
+}
+
+/* Con "reducir movimiento" activado no se mueve nada de esto */
+@media (prefers-reduced-motion:reduce){
+  .card__media img,.card__media::after,.card__body::before{
+    transition:none !important;transform:none !important;animation:none !important;
+  }
+}
+
+/* ---------- Disponibilidad ---------- */
+.card__stock{
+  display:flex;align-items:center;gap:7px;margin:2px 0 0;
+  font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+}
+.card__stock i{
+  width:6px;height:6px;border-radius:50%;flex:0 0 6px;
+}
+.card__stock.es-ya{color:#8fc9a0;}
+.card__stock.es-ya i{background:#6fbf8a;box-shadow:0 0 0 3px rgba(111,191,138,.16);}
+.card__stock.es-encargo{color:var(--oro-claro);}
+.card__stock.es-encargo i{background:var(--oro);box-shadow:0 0 0 3px rgba(201,162,39,.16);}
+
+.modal__dato b.stock-ya{color:#8fc9a0;}
+.modal__dato b.stock-encargo{color:var(--oro-claro);}
+
+/* ============================================================
+   CATÁLOGO EN CELULAR — dos productos por fila
+   La tarjeta queda angosta (unos 155 px), así que todo lo de
+   adentro se achica: si no, el nombre y el precio se apelotonan.
+   ============================================================ */
+@media(max-width:560px){
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+
+  .card{border-radius:12px;}
+  .card__body{padding:12px 12px 14px;gap:6px;}
+
+  .card__cat{font-size:.56rem;letter-spacing:.14em;}
+  .card__name{font-size:1.02rem;line-height:1.15;}
+  .card__fam{font-size:.72rem;}
+
+  /* De tres notas a dos: la tercera no entra sin romper el renglón */
+  .card__notas{gap:4px;}
+  .card__notas .nota{font-size:.58rem;padding:2px 7px;}
+  .card__notas .nota:nth-child(3){display:none;}
+
+  .card__stock{font-size:.58rem;letter-spacing:.1em;gap:5px;}
+  .card__stock i{width:5px;height:5px;flex-basis:5px;}
+
+  /* El precio y el botón dejan de ir lado a lado */
+  .card__foot{
+    flex-direction:column;align-items:stretch;gap:9px;padding-top:11px;
+  }
+  .card__precio small{font-size:.56rem;}
+  .card__precio strong{font-size:1.18rem;}
+  .card__add{width:100%;padding:9px 10px;font-size:.64rem;letter-spacing:.1em;}
+
+  .card__tag{font-size:.52rem;padding:4px 8px;top:8px;left:8px;}
+  .card__quick{font-size:.62rem;padding:8px;inset:auto 8px 8px;}
+}
+
+/* ---------- Botón de entrada del dueño ----------
+   Se ve como botón para que lo encuentres rápido, pero apagado, para
+   que al cliente no le llame la atención. Se enciende al pasar por encima. */
+.btn-dueno{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:100px;
+  border:1px solid var(--linea-fuerte);
+  color:var(--texto-2);opacity:.6;
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  transition:opacity var(--t-rapido) ease,color var(--t-rapido) ease,
+             border-color var(--t-rapido) ease,transform var(--t-rapido) var(--ease-entra);
+}
+.btn-dueno svg{
+  width:14px;height:14px;fill:none;stroke:currentColor;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
+}
+.btn-dueno:hover{opacity:1;color:var(--oro-claro);border-color:var(--oro);}
+.btn-dueno:active{transform:scale(.96);}

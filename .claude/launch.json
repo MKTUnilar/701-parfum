@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/Users/usuario/Desktop/calude/paginas wep/perfumes/.claude/servidor.py"],
+      "port": 8743
+    }
+  ]
+}

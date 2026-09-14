@@ -1,0 +1,16 @@
+# Lo que se queda en tu Mac y NO se sube a la web.
+
+# Tus 52 fotos originales (7 MB). El sitio usa las ya procesadas
+# de assets/img/, así que subirlas sería peso al pedo.
+assets/img nuevas/
+
+# El frasco 3D viejo, guardado por si algún día se vuelve atrás
+_sin-uso/
+
+# Notas para vos, no para el visitante
+README.md
+
+# Servidor local para probar la página en el navegador, no es parte del sitio
+.claude/
+
+.DS_Store

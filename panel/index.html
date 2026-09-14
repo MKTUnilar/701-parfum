@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel · 701 Parfum</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/panel.css">
+</head>
+<body>
+
+<!-- ══════════ ENTRADA ══════════ -->
+<div class="puerta" id="puerta">
+  <form class="puerta__caja" id="form-llave">
+    <span class="logo"><b>701</b> PARFUM</span>
+    <h1>Panel del dueño</h1>
+    <p>Desde acá cambiás precios, agregás perfumes y editás el catálogo.</p>
+    <label for="llave">Clave</label>
+    <input type="password" id="llave" autocomplete="current-password" autofocus>
+    <p class="error" id="error-llave"></p>
+    <button type="submit" class="btn btn--oro">Entrar</button>
+  </form>
+</div>
+
+<!-- ══════════ PANEL ══════════ -->
+<div class="panel" id="panel" hidden>
+
+  <header class="barra">
+    <span class="barra__izq">
+      <a class="btn-volver" href="/" title="Ir a la tienda">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 5l-7 7 7 7"/>
+        </svg>
+        Volver a la tienda
+      </a>
+      <span class="logo"><b>701</b> PARFUM · panel</span>
+    </span>
+    <div class="barra__der">
+      <span class="estado" id="estado">Sin cambios</span>
+      <button class="btn btn--fantasma" id="btn-descartar">Descartar cambios</button>
+      <button class="btn btn--oro" id="btn-descargar">Descargar archivo actualizado</button>
+    </div>
+  </header>
+
+  <div class="aviso" id="aviso"></div>
+
+  <main class="cuerpo">
+
+    <!-- ---------- Cómo publicar ---------- -->
+    <section class="tarjeta pasos">
+      <h2>Cómo se publican los cambios</h2>
+      <p class="nota">Los cambios que hacés acá quedan guardados en este navegador
+        hasta que los publiques. La web sigue mostrando lo anterior hasta el paso 3.</p>
+      <ol>
+        <li><b>Editá</b> lo que quieras acá abajo.</li>
+        <li><b>Descargá el archivo</b> con el botón de arriba. Se baja un <code>data.js</code>.</li>
+        <li><b>Reemplazá</b> el archivo viejo en <code>js/data.js</code> de la carpeta del proyecto,
+            y corré este comando en la Terminal:
+          <code class="comando">cd "/Users/usuario/Desktop/calude/paginas wep/perfumes" &amp;&amp; vercel --prod --yes</code>
+        </li>
+      </ol>
+      <p class="nota">¿Agregaste un producto nuevo? Acordate de guardar también su
+        foto en <code>assets/img/</code> con el nombre exacto que pusiste en el campo Foto.</p>
+    </section>
+
+    <!-- ---------- Configuración ---------- -->
+    <section class="tarjeta">
+      <h2>Datos de la tienda</h2>
+      <form id="form-config" class="rejilla">
+        <label>WhatsApp
+          <input type="text" id="c-whatsapp" placeholder="5492975925565">
+          <small>Con código de país, sin + ni espacios. Vacío = los pedidos van a Instagram.</small>
+        </label>
+        <label>Instagram
+          <input type="text" id="c-instagram" placeholder="701_parfum">
+        </label>
+        <label>Moneda
+          <select id="c-moneda">
+            <option value="ARS">Pesos ($)</option>
+          </select>
+        </label>
+        <label>Costo de envío
+          <input type="text" id="c-envio" placeholder="vacío = a coordinar">
+          <small>Dejalo vacío para que diga "A coordinar".</small>
+        </label>
+        <label class="ancho">Frase de la portada
+          <input type="text" id="c-slogan">
+        </label>
+        <button type="submit" class="btn btn--fantasma">Guardar datos</button>
+      </form>
+    </section>
+
+    <!-- ---------- Catálogo ---------- -->
+    <section class="tarjeta">
+      <div class="cabecera-lista">
+        <h2>Catálogo <span class="cuenta" id="cuenta"></span></h2>
+        <div class="herramientas">
+          <input type="search" id="buscar" placeholder="Buscar por nombre o marca…">
+          <button class="btn btn--oro" id="btn-nuevo">+ Agregar perfume</button>
+        </div>
+      </div>
+      <ul class="lista" id="lista"></ul>
+    </section>
+
+  </main>
+</div>
+
+<!-- ══════════ FICHA ══════════ -->
+<div class="ficha" id="ficha" hidden>
+  <form class="ficha__caja" id="form-ficha">
+    <header>
+      <h2 id="ficha-titulo">Producto</h2>
+      <button type="button" id="btn-cerrar-ficha" aria-label="Cerrar">✕</button>
+    </header>
+
+    <div class="ficha__cuerpo rejilla">
+      <label class="ancho">Nombre
+        <input type="text" id="f-nombre" required>
+      </label>
+      <label>Marca
+        <input type="text" id="f-marca" placeholder="Rasasi, Lattafa, Armaf…">
+      </label>
+      <label>Categoría
+        <select id="f-categoria">
+          <option value="hombre">Hombre</option>
+          <option value="mujer">Mujer</option>
+          <option value="unisex">Unisex</option>
+        </select>
+      </label>
+      <label>Familia
+        <input type="text" id="f-familia" placeholder="Amaderado especiado">
+      </label>
+      <label>Duración
+        <input type="text" id="f-duracion" placeholder="8–10 h">
+      </label>
+      <label>Tamaño
+        <input type="text" id="f-tamano" placeholder="100 ml">
+      </label>
+      <label>Precio
+        <input type="number" id="f-precio" min="0" step="1000">
+      </label>
+      <label class="ancho">Descripción
+        <textarea id="f-descripcion" rows="3"></textarea>
+      </label>
+      <label class="ancho">Notas olfativas
+        <input type="text" id="f-notas" placeholder="Especias, Maderas, Ámbar">
+        <small>Separadas por comas. En la tarjeta se muestran las tres primeras.</small>
+      </label>
+
+      <div class="ancho foto-bloque">
+        <label class="ancho">Foto</label>
+
+        <div class="foto-fila">
+          <div class="vista" id="f-vista"></div>
+
+          <div class="foto-acciones">
+            <input type="file" id="f-archivo" accept="image/*" hidden>
+            <button type="button" class="btn btn--oro" id="btn-elegir">Elegir foto…</button>
+            <p class="foto-ayuda" id="f-estado">
+              Elegí una foto de tu computadora o celular. La recorto y la
+              optimizo sola, y te la dejo lista para guardar.
+            </p>
+            <button type="button" class="btn btn--fantasma" id="btn-bajar-foto" hidden>
+              Descargar foto lista
+            </button>
+            <p class="foto-guardar" id="f-instruccion" hidden></p>
+          </div>
+        </div>
+
+        <details class="avanzado">
+          <summary>La foto ya está en la carpeta</summary>
+          <span class="fila-foto">
+            <input type="text" id="f-img" placeholder="assets/img/nombre.webp">
+            <button type="button" class="btn btn--fantasma" id="btn-sugerir">Sugerir nombre</button>
+          </span>
+          <small>Nombre del archivo dentro de <code>assets/img/</code>. Puede ser .webp, .jpg o .png.</small>
+        </details>
+      </div>
+
+      <label>Disponibilidad
+        <select id="f-stock">
+          <option value="si">Stock inmediato</option>
+          <option value="no">Por encargo</option>
+        </select>
+      </label>
+      <label class="casilla">
+        <input type="checkbox" id="f-destacado"> Marcar como “Más vendido”
+      </label>
+      <label class="casilla">
+        <input type="checkbox" id="f-oculto"> Ocultar de la web
+        <small>Útil mientras no tengas la foto.</small>
+      </label>
+
+      <label>Color de respaldo 1
+        <input type="color" id="f-tono1">
+        <small>Se usa para dibujar un frasco si falta la foto.</small>
+      </label>
+      <label>Color de respaldo 2
+        <input type="color" id="f-tono2">
+      </label>
+    </div>
+
+    <footer>
+      <button type="button" class="btn btn--fantasma" onclick="document.getElementById('btn-cerrar-ficha').click()">Cancelar</button>
+      <button type="submit" class="btn btn--oro">Guardar producto</button>
+    </footer>
+  </form>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/panel.js"></script>
+</body>
+</html>

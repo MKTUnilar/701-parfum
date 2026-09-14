@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>701 Parfum — Aromas que hablan por vos</title>
+<meta name="description" content="Perfumería de alta duración: 52 fragancias originales importadas para hombre, mujer y unisex. Envíos a todo el país. Pedidos por Instagram.">
+<meta name="theme-color" content="#0b0b0d">
+
+<!-- Ícono de la pestaña y del celular -->
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- Vista previa al compartir el link (Instagram, WhatsApp, Facebook).
+     Cuando tengas la dirección final, agregá acá:
+     <meta property="og:url" content="https://tudireccion.com/"> -->
+<meta property="og:site_name" content="701 Parfum">
+<meta property="og:title" content="701 Parfum — Aromas que hablan por vos">
+<meta property="og:description" content="52 fragancias originales importadas. Envíos a todo el país. Pedidos por Instagram.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:image" content="/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="701 Parfum — Aromas que hablan por vos">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="701 Parfum — Aromas que hablan por vos">
+<meta name="twitter:description" content="52 fragancias originales importadas. Envíos a todo el país.">
+<meta name="twitter:image" content="/assets/og.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  /* Requerido por Lenis (scroll suave) */
+  html.lenis,html.lenis body{height:auto;}
+  .lenis.lenis-smooth{scroll-behavior:auto !important;}
+  .lenis.lenis-stopped{overflow:hidden;}
+</style>
+</head>
+<body>
+
+<div id="app">
+
+<!-- ══════════ BARRA SUPERIOR ══════════ -->
+<div class="topbar">
+  <div class="wrap topbar__inner">
+    <span>✦ Envíos a todo el país 🇦🇷</span>
+    <span class="topbar__sep">·</span>
+    <span id="tb-promo">Envío gratis en compras superiores a <b id="tb-envio-gratis">—</b></span>
+  </div>
+</div>
+
+<!-- ══════════ HEADER ══════════ -->
+<header class="header" id="header">
+  <div class="wrap header__inner">
+    <a href="#" class="logo" aria-label="701 Parfum, inicio">
+      <span class="logo__num">701</span>
+      <span class="logo__txt">PARFUM</span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="#catalogo" data-cat="todos">Catálogo</a>
+      <a href="#catalogo" data-cat="hombre">Hombre</a>
+      <a href="#catalogo" data-cat="mujer">Mujer</a>
+      <a href="#catalogo" data-cat="unisex">Unisex</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#faq">Preguntas</a>
+    </nav>
+
+    <div class="header__actions">
+      <button class="icon-btn" id="btn-buscar" aria-label="Buscar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </button>
+      <button class="icon-btn icon-btn--cart" id="btn-carrito" aria-label="Abrir carrito">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7V5a3 3 0 016 0v2"/></svg>
+        <span class="cart-count" id="cart-count">0</span>
+      </button>
+      <button class="icon-btn burger" id="btn-menu" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+
+  <div class="searchbar" id="searchbar" hidden>
+    <div class="wrap">
+      <input type="search" id="input-buscar" placeholder="Buscar una fragancia, familia o nota olfativa…" autocomplete="off">
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ HERO PARALLAX ══════════ -->
+<section class="parallax" id="inicio">
+  <div class="parallax__header">
+    <div class="parallax__visuals">
+      <div class="parallax__black-line-overflow"></div>
+
+      <div data-parallax-layers class="parallax__layers">
+
+        <!-- Capa 1 · el agujero negro (js/agujero.js).
+             Cada píxel dispara un rayo por espacio curvo: el halo de arriba,
+             el de abajo y el anillo pegado a la sombra son el mismo disco de
+             gas visto de nuevo por la luz doblada. -->
+        <canvas id="hero-agujero" aria-hidden="true"></canvas>
+
+        <!-- Capa 3 · título -->
+        <div class="parallax__layer-title" data-parallax-layer="3">
+          <p class="hero__eyebrow entra" style="--retraso:.15s">Perfumería de alta duración</p>
+          <h1 class="marca entra" style="--retraso:.35s">
+            <span class="marca__num">701</span>
+            <span class="marca__pie">
+              <i aria-hidden="true"></i>
+              <span class="marca__txt">Parfum</span>
+              <i aria-hidden="true"></i>
+            </span>
+          </h1>
+          <p class="parallax__sub entra" style="--retraso:.8s">Aromas que hablan por vos · Envíos a todo el país</p>
+        </div>
+
+        <!-- Capa 4 · los tres frascos en primer plano -->
+        <div class="p-layer p-layer--bottle" data-parallax-layer="4">
+          <!-- Cada frasco es un video real convertido en cuadros con fondo
+               transparente. Los tres se dibujan con el MISMO índice de
+               cuadro según el scroll, así giran juntos: ver js/frasco.js.
+               Las imágenes son el respaldo mientras cargan los cuadros o
+               si falla el JS. -->
+          <div class="p-layer__frasco p-layer__frasco--bianco">
+            <canvas id="hero-frasco-bianco" class="hero-frasco-lienzo" data-ver="veneno-bianco"
+                    role="button" tabindex="0" aria-label="Ver la ficha de Veneno Bianco, de French Avenue"></canvas>
+            <img id="hero-foto-bianco" class="hero-frasco-foto hero-frasco-foto--lateral"
+                 src="assets/frasco-bianco/f00.webp" alt="Frasco de perfume Veneno Bianco"
+                 width="260" height="805" loading="lazy">
+            <button class="frasco-ficha" data-ver="veneno-bianco">Bianco</button>
+          </div>
+
+          <div class="p-layer__frasco p-layer__frasco--negro">
+            <canvas id="hero-frasco" class="hero-frasco-lienzo" data-ver="veneno" role="button" tabindex="0"
+                    aria-label="Ver la ficha de Veneno, de French Avenue"></canvas>
+            <img id="hero-foto" class="hero-frasco-foto hero-frasco-foto--principal"
+                 src="assets/frasco/f00.webp" alt="Frasco de perfume Veneno"
+                 width="308" height="700" fetchpriority="high">
+            <button class="frasco-ficha" data-ver="veneno">Veneno<span class="frasco-ficha__marca"> · French Avenue</span></button>
+          </div>
+
+          <div class="p-layer__frasco p-layer__frasco--scarlet">
+            <canvas id="hero-frasco-scarlet" class="hero-frasco-lienzo" data-ver="veneno-scarlet"
+                    role="button" tabindex="0" aria-label="Ver la ficha de Veneno Scarlet, de French Avenue"></canvas>
+            <img id="hero-foto-scarlet" class="hero-frasco-foto hero-frasco-foto--lateral"
+                 src="assets/frasco-scarlet/f00.webp" alt="Frasco de perfume Veneno Scarlet"
+                 width="260" height="634" loading="lazy">
+            <button class="frasco-ficha" data-ver="veneno-scarlet">Scarlet</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="parallax__vineta" aria-hidden="true"></div>
+      <div class="parallax__fade"></div>
+      <a href="#catalogo" class="parallax__scrollcue entra" style="--retraso:1.4s" aria-label="Ir al catálogo"><span>Scroll</span><i></i></a>
+    </div>
+  </div>
+
+  <div class="parallax__content">
+    <div class="wrap">
+      <p class="hero__eyebrow">La colección</p>
+      <h2>Fragancias intensas,<br><em>de estela marcada</em></h2>
+      <p>Alta concentración de esencia, entre 6 y 12 horas en piel. Para hombre, mujer y unisex — seleccionadas una por una.</p>
+      <div class="hero__cta">
+        <a href="#catalogo" class="btn btn--gold">Ver catálogo</a>
+        <a href="#" class="btn btn--ghost" id="hero-wsp">Consultar por WhatsApp</a>
+      </div>
+      <ul class="hero__badges">
+        <li>✦ Hasta 12 h de duración</li>
+        <li>✦ Envíos a todo el país</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ BENEFICIOS ══════════ -->
+<section class="beneficios">
+  <div class="wrap beneficios__grid">
+    <div class="beneficio">
+      <div class="beneficio__ico" aria-hidden="true">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><defs>
+<linearGradient id="ico-o1" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#f7e6b0"/><stop offset=".5" stop-color="#c9a227"/><stop offset="1" stop-color="#7d6014"/></linearGradient>
+<radialGradient id="ico-g1" cx="50%" cy="40%" r="58%"><stop offset="0" stop-color="#c9a227" stop-opacity=".16"/><stop offset="1" stop-color="#c9a227" stop-opacity="0"/></radialGradient></defs>
+<circle cx="32" cy="32" r="31" fill="url(#ico-g1)"/><circle cx="32" cy="32" r="31" fill="none" stroke="url(#ico-o1)" stroke-opacity=".4"/>
+<g fill="none" stroke="url(#ico-o1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M15 24h19v14H15z"/><path d="M34 28h7l6 5.5V38H34z"/><path d="M36 30h4l3 3h-7z"/>
+<circle cx="22" cy="40.5" r="3.1"/><circle cx="42" cy="40.5" r="3.1"/>
+<path d="M15 38h3M26 38h4M46 38h2"/></g>
+<circle cx="22" cy="40.5" r=".9" fill="url(#ico-o1)"/><circle cx="42" cy="40.5" r=".9" fill="url(#ico-o1)"/></svg>
+        </div>
+      <h3>Envíos a todo el país</h3>
+      <p>Llegamos a todo el país. Coordinamos el envío el mismo día que confirmás tu pedido.</p>
+    </div>
+
+    <div class="beneficio">
+      <div class="beneficio__ico" aria-hidden="true">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><defs>
+<linearGradient id="ico-o2" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#f7e6b0"/><stop offset=".5" stop-color="#c9a227"/><stop offset="1" stop-color="#7d6014"/></linearGradient>
+<radialGradient id="ico-g2" cx="50%" cy="40%" r="58%"><stop offset="0" stop-color="#c9a227" stop-opacity=".16"/><stop offset="1" stop-color="#c9a227" stop-opacity="0"/></radialGradient></defs>
+<circle cx="32" cy="32" r="31" fill="url(#ico-g2)"/><circle cx="32" cy="32" r="31" fill="none" stroke="url(#ico-o2)" stroke-opacity=".4"/>
+<g fill="none" stroke="url(#ico-o2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M22 17h20M22 47h20"/>
+<path d="M24.5 17c0 8 7.5 10.5 7.5 15s-7.5 7-7.5 15"/>
+<path d="M39.5 17c0 8-7.5 10.5-7.5 15s7.5 7 7.5 15"/></g>
+<path d="M27 20.5h10c0 3.6-3.6 5.8-5 7-1.4-1.2-5-3.4-5-7z" fill="url(#ico-o2)" opacity=".85"/>
+<path d="M27.5 43.5h9c0-3.2-3-5.2-4.5-5.2s-4.5 2-4.5 5.2z" fill="url(#ico-o2)" opacity=".85"/>
+<path d="M32 33.5v3.5" stroke="url(#ico-o2)" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </div>
+      <h3>Larga duración</h3>
+      <p>Concentración alta de esencia: entre 6 y 12 horas en piel según la fragancia.</p>
+    </div>
+
+    <div class="beneficio">
+      <div class="beneficio__ico" aria-hidden="true">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><defs>
+<linearGradient id="ico-o3" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#f7e6b0"/><stop offset=".5" stop-color="#c9a227"/><stop offset="1" stop-color="#7d6014"/></linearGradient>
+<radialGradient id="ico-g3" cx="50%" cy="40%" r="58%"><stop offset="0" stop-color="#c9a227" stop-opacity=".16"/><stop offset="1" stop-color="#c9a227" stop-opacity="0"/></radialGradient></defs>
+<circle cx="32" cy="32" r="31" fill="url(#ico-g3)"/><circle cx="32" cy="32" r="31" fill="none" stroke="url(#ico-o3)" stroke-opacity=".4"/>
+<g fill="none" stroke="url(#ico-o3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M26 16h17a4 4 0 014 4v9a4 4 0 01-4 4h-1.5v5l-5-5" stroke-opacity=".5"/>
+<path d="M21 22h16a4 4 0 014 4v10a4 4 0 01-4 4H28l-6.5 5v-5H21a4 4 0 01-4-4V26a4 4 0 014-4z"/></g>
+<circle cx="25" cy="31" r="1.5" fill="url(#ico-o3)"/><circle cx="31" cy="31" r="1.5" fill="url(#ico-o3)"/><circle cx="37" cy="31" r="1.5" fill="url(#ico-o3)"/></svg>
+        </div>
+      <h3>Asesoría personal</h3>
+      <p>¿No sabés cuál elegir? Escribinos y te ayudamos a encontrar tu aroma.</p>
+    </div>
+
+    <div class="beneficio">
+      <div class="beneficio__ico" aria-hidden="true">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><defs>
+<linearGradient id="ico-o4" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#f7e6b0"/><stop offset=".5" stop-color="#c9a227"/><stop offset="1" stop-color="#7d6014"/></linearGradient>
+<radialGradient id="ico-g4" cx="50%" cy="40%" r="58%"><stop offset="0" stop-color="#c9a227" stop-opacity=".16"/><stop offset="1" stop-color="#c9a227" stop-opacity="0"/></radialGradient></defs>
+<circle cx="32" cy="32" r="31" fill="url(#ico-g4)"/><circle cx="32" cy="32" r="31" fill="none" stroke="url(#ico-o4)" stroke-opacity=".4"/>
+<g fill="none" stroke="url(#ico-o4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M18 31h28v16H18z"/><path d="M16 24h32v7H16z"/><path d="M32 24v23"/>
+<path d="M32 24c-3.5-6-11-5-11-.6 0 2 2.6 2.6 11 .6z"/><path d="M32 24c3.5-6 11-5 11-.6 0 2-2.6 2.6-11 .6z"/></g></svg>
+        </div>
+      <h3>Ideal para regalar</h3>
+      <p>Cada frasco viene en su estuche original, listo para entregar tal cual.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CATÁLOGO ══════════ -->
+<section class="catalogo" id="catalogo">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="sec-eyebrow">Nuestra colección</p>
+      <h2 class="sec-title">Catálogo</h2>
+      <p class="sec-sub">Todos los precios incluyen el frasco. Consultá por disponibilidad de tamaños.</p>
+    </header>
+
+    <div class="filtros">
+      <div class="chips" id="chips">
+        <button class="chip is-active" data-cat="todos">Todos</button>
+        <button class="chip" data-cat="hombre">Hombre</button>
+        <button class="chip" data-cat="mujer">Mujer</button>
+        <button class="chip" data-cat="unisex">Unisex</button>
+      </div>
+      <div class="filtros__right">
+        <label class="select">
+          <span>Ordenar</span>
+          <select id="orden">
+            <option value="destacados">Destacados</option>
+            <option value="precio-asc">Menor precio</option>
+            <option value="precio-desc">Mayor precio</option>
+            <option value="nombre">Nombre A–Z</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <p class="resultado-info" id="resultado-info"></p>
+    <div class="grid" id="grid"></div>
+    <div class="vacio" id="vacio" hidden>
+      <p>No encontramos fragancias con ese criterio.</p>
+      <button class="btn btn--ghost" id="btn-limpiar">Ver todo el catálogo</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ NOSOTROS ══════════ -->
+<section class="nosotros" id="nosotros">
+  <div class="wrap nosotros__inner">
+    <div class="nosotros__txt">
+      <p class="sec-eyebrow">Sobre 701</p>
+      <h2 class="sec-title">Un aroma no se elige:<br>te elige.</h2>
+      <p>701 Parfum nació de una idea simple: que una buena fragancia no debería ser un lujo inalcanzable. Trabajamos con esencias de alta concentración para lograr perfumes que duran, proyectan y se recuerdan.</p>
+      <p>Cada frasco se prepara y se controla antes de salir. Si algo no te convence, escribinos: estamos del otro lado.</p>
+      <a href="#" class="btn btn--gold" id="nos-wsp">Escribinos por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FAQ ══════════ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="sec-eyebrow">Ayuda</p>
+      <h2 class="sec-title">Preguntas frecuentes</h2>
+    </header>
+    <div class="faq__list">
+      <details><summary>¿Cómo hago un pedido?</summary><p>Agregá los productos al carrito y tocá “Finalizar pedido”. Se copia el detalle y se abre nuestro chat: lo pegás y te confirmamos stock, envío y forma de pago.</p></details>
+      <details><summary>¿Cuánto cuesta el envío?</summary><p>Lo coordinamos por chat según a dónde vaya el pedido: hacemos entregas y envíos por agencia a todo el país.</p></details>
+      <details><summary>¿Cuánto duran los perfumes?</summary><p>Entre 6 y 12 horas según la fragancia y el tipo de piel. En la ficha de cada producto figura la duración estimada.</p></details>
+      <details><summary>¿Puedo probar antes de comprar?</summary><p>Escribinos y te contamos cómo huele cada uno, con qué se parece y para qué ocasión va mejor. Te ayudamos a elegir antes de que compres.</p></details>
+      <details><summary>¿Qué formas de pago aceptan?</summary><p>Transferencia y giro. Te pasamos los datos al confirmar el pedido.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA FINAL ══════════ -->
+<section class="cta-final">
+  <div class="wrap">
+    <h2>¿No sabés cuál elegir?</h2>
+    <p>Contanos qué aromas te gustan y te armamos una recomendación personalizada.</p>
+    <a href="#" class="btn btn--gold" id="cta-wsp">Hablar con nosotros</a>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__brand">
+      <a href="#" class="logo"><span class="logo__num">701</span><span class="logo__txt">PARFUM</span></a>
+      <p id="footer-slogan">Aromas que hablan por vos</p>
+    </div>
+    <div class="footer__col">
+      <h4>Catálogo</h4>
+      <a href="#catalogo" data-cat="hombre">Hombre</a>
+      <a href="#catalogo" data-cat="mujer">Mujer</a>
+      <a href="#catalogo" data-cat="unisex">Unisex</a>
+    </div>
+    <div class="footer__col">
+      <h4>Ayuda</h4>
+      <a href="#faq">Preguntas frecuentes</a>
+      <a href="#nosotros">Sobre nosotros</a>
+      <a href="#" id="footer-wsp">WhatsApp</a>
+    </div>
+    <div class="footer__col">
+      <h4>Seguinos</h4>
+      <a href="https://www.instagram.com/701_parfum/" target="_blank" rel="noopener" id="footer-ig">@701_parfum</a>
+      <a href="https://www.instagram.com/fmartinn_22/" target="_blank" rel="noopener" id="footer-ig2">@fmartinn_22</a>
+    </div>
+  </div>
+  <div class="wrap footer__bottom">
+    <span>© <span id="year"></span> 701 Parfum. Todos los derechos reservados.</span>
+
+    <!-- Botón de entrada al panel del dueño. Pide clave.
+         Va de este lado porque en la esquina derecha está el botón flotante de
+         WhatsApp y se pisaban. Si preferís que no se vea, borrá este bloque y
+         entrá escribiendo /panel en la barra del navegador. -->
+    <a class="btn-dueno" href="/panel" rel="nofollow">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/>
+        <path d="M8 10.5V7.6a4 4 0 018 0v2.9"/>
+        <circle cx="12" cy="15.4" r="1.5" fill="currentColor" stroke="none"/>
+      </svg>
+      Dueño
+    </a>
+
+    <span id="footer-ciudad"></span>
+  </div>
+</footer>
+
+</div><!-- /#app -->
+
+<!-- ══════════ CARRITO (drawer) ══════════ -->
+<div class="overlay" id="overlay" hidden></div>
+<aside class="cart" id="cart" aria-label="Carrito de compras" aria-hidden="true">
+  <div class="cart__agarradera" id="cart-agarradera" aria-hidden="true"><span></span></div>
+  <header class="cart__head">
+    <h3>Tu pedido</h3>
+    <button class="icon-btn" id="cart-close" aria-label="Cerrar carrito">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </header>
+  <div class="cart__body" id="cart-body"></div>
+  <footer class="cart__foot" id="cart-foot"></footer>
+</aside>
+
+<!-- ══════════ MODAL PRODUCTO ══════════ -->
+<div class="modal" id="modal" hidden>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modal-nombre">
+    <button class="icon-btn modal__close" id="modal-close" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="modal__grid" id="modal-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════ BOTÓN FLOTANTE WHATSAPP ══════════ -->
+<a href="#" class="fab-wsp" id="fab-wsp" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.4L3 29l6.8-1.7c1.9 1 4 1.6 6.2 1.6 7.2 0 13-5.8 13-13S23.2 3 16 3zm7.5 18.4c-.3.9-1.8 1.7-2.5 1.8-.6.1-1.4.1-2.3-.1-.5-.2-1.2-.4-2.1-.8-3.7-1.6-6.1-5.3-6.3-5.6-.2-.2-1.5-2-1.5-3.8s.9-2.7 1.3-3.1c.3-.3.7-.4 1-.4h.7c.2 0 .5-.1.8.6l1.1 2.6c.1.2.2.4 0 .7l-.4.6-.4.4c-.2.2-.4.4-.2.7.2.3.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.8 1.8.3.1.5.1.7-.1l1-1.2c.2-.3.5-.2.8-.1l2.4 1.2c.3.2.6.3.7.4.1.2.1.9-.2 1.8z"/></svg>
+</a>
+
+<!-- ══════════ AVISOS APILADOS ══════════ -->
+<ol class="avisos" id="avisos" aria-live="polite" aria-relevant="additions"></ol>
+
+<!-- Animación del hero: GSAP + ScrollTrigger + Lenis -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+
+<script src="js/data.js"></script>
+<script src="js/interacciones.js"></script>
+<script src="js/app.js"></script>
+<script src="js/parallax.js" defer></script>
+
+<!-- Frasco del inicio: secuencia de cuadros movida por el scroll -->
+<script src="js/agujero.js" defer></script>
+<script src="js/frasco.js" defer></script>
+</body>
+</html>

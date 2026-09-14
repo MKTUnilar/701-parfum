@@ -1,0 +1,8 @@
+.vercel
+.env*
+.DS_Store
+
+# Fotos originales sin procesar (7 MB) y el frasco 3D viejo: no hacen
+# falta para que el sitio funcione, quedan solo en tu Mac.
+assets/img nuevas/
+_sin-uso/
