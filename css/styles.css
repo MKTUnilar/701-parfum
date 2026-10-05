@@ -399,7 +399,8 @@ svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke
 .fab-wsp{
   position:fixed;right:20px;bottom:20px;z-index:70;width:54px;height:54px;border-radius:50%;
   background:var(--verde-wsp);display:grid;place-items:center;
-  box-shadow:0 10px 26px rgba(37,211,102,.35);transition:.25s;
+  box-shadow:0 10px 26px rgba(37,211,102,.35);
+  transition:transform var(--t-medio,260ms) var(--ease-entra,ease),box-shadow var(--t-medio,260ms) ease;
 }
 .fab-wsp svg{width:30px;height:30px;fill:#04220f;stroke:none;}
 .fab-wsp:hover{transform:scale(1.08);}
@@ -409,7 +410,7 @@ svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke
   position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);z-index:120;
   background:var(--negro-3);border:1px solid var(--oro);color:var(--texto);
   padding:13px 24px;border-radius:100px;font-size:.85rem;box-shadow:var(--sombra);
-  opacity:0;transition:.28s;pointer-events:none;max-width:calc(100% - 32px);text-align:center;
+  opacity:0;transition:opacity .28s ease,transform .28s var(--ease-entra,ease);pointer-events:none;max-width:calc(100% - 32px);text-align:center;
 }
 .toast.is-visible{opacity:1;transform:translate(-50%,0);}
 
@@ -688,7 +689,8 @@ svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke
 .chip{transition:color var(--t-rapido) ease,background var(--t-rapido) ease,
       border-color var(--t-rapido) ease,transform var(--t-rapido) var(--ease-entra);}
 .chip:active{transform:scale(.96);}
-.card__add,.talla,.qty button{transition:all var(--t-rapido) var(--ease-entra);}
+.card__add,.talla,.qty button{transition:background var(--t-rapido) ease,color var(--t-rapido) ease,
+  border-color var(--t-rapido) ease,transform var(--t-rapido) var(--ease-entra);}
 .card__add:active,.talla:active{transform:scale(.95);}
 .qty button:active{transform:scale(.85);}
 
@@ -766,7 +768,10 @@ body.con-panel .avisos{right:calc(min(420px, 100vw) + 24px);}
 
 @media(max-width:700px){
   .avisos{left:14px;right:14px;bottom:14px;width:auto;}
-  body.con-panel .avisos{right:14px;}
+  /* En el celular el carrito es una hoja a todo el ancho: el aviso abajo
+     taparía "Finalizar pedido". Con el carrito abierto sube al fondo oscuro
+     de arriba (el contenedor mide 0 de alto y el aviso crece hacia arriba). */
+  body.con-panel .avisos{right:14px;bottom:auto;top:76px;}
 }
 
 /* ============================================================
@@ -834,7 +839,8 @@ body.con-panel .avisos{right:calc(min(420px, 100vw) + 24px);}
   border:1px solid rgba(201,162,39,.42);color:var(--oro-claro);
   border-radius:100px;padding:7px 18px;
   font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;
-  transition:all var(--t-rapido) var(--ease-entra);
+  transition:background var(--t-rapido) ease,color var(--t-rapido) ease,
+    border-color var(--t-rapido) ease,transform var(--t-rapido) var(--ease-entra);
 }
 .frasco-ficha:hover{background:var(--oro);border-color:var(--oro);color:#12100a;}
 .frasco-ficha:active{transform:scale(.96);}
@@ -979,3 +985,40 @@ body.ya-scrolleo .parallax__scrollcue{opacity:0;pointer-events:none;}
 }
 .btn-dueno:hover{opacity:1;color:var(--oro-claro);border-color:var(--oro);}
 .btn-dueno:active{transform:scale(.96);}
+
+
+/* ============================================================
+   CATÁLOGO — "Ver más" y filtros en el celular
+   ============================================================ */
+.mas{display:flex;justify-content:center;margin-top:44px;}
+.mas[hidden]{display:none;}
+
+@media (max-width:640px){
+  /* Los 4 filtros caben en una sola fila deslizable en vez de ocupar dos */
+  .chips{flex-wrap:nowrap;overflow-x:auto;margin:0 -24px;padding:2px 24px;
+         scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+  .chips::-webkit-scrollbar{display:none;}
+  .chip{flex:0 0 auto;padding:9px 18px;}
+  .filtros{gap:12px;}
+  /* El botón de WhatsApp más chico y pegado a la esquina: tapa menos las tarjetas */
+  .fab-wsp{width:46px;height:46px;right:14px;bottom:14px;}
+  .fab-wsp svg{width:25px;height:25px;}
+}
+
+/* ---------- Ficha en el celular: precio y botón siempre a la vista ----------
+   Antes había que desplazar la ficha para llegar a "Agregar al pedido". */
+.modal__compra{display:flex;flex-direction:column;gap:14px;}
+@media(max-width:760px){
+  .modal__compra{
+    position:sticky;bottom:0;z-index:2;flex-direction:row;align-items:center;gap:16px;
+    margin:6px -22px -30px;padding:14px 22px calc(14px + env(safe-area-inset-bottom));
+    background:var(--negro-2);border-top:1px solid var(--linea);
+  }
+  .modal__compra .modal__precio{font-size:1.7rem;white-space:nowrap;}
+  .modal__compra .btn{flex:1;}
+}
+@media(max-width:760px){
+  .modal__grid{grid-template-columns:minmax(0,1fr);}
+  .modal__info{min-width:0;}
+  .modal__compra .btn{padding-left:12px;padding-right:12px;letter-spacing:.1em;font-size:.74rem;white-space:nowrap;}
+}

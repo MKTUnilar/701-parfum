@@ -206,14 +206,44 @@
     </article>`;
   }
 
-  function render() {
-    const lista = filtrados();
-    grid.innerHTML = lista.map(cardHTML).join('');
-    $('#vacio').hidden = lista.length > 0;
-    $('#resultado-info').textContent = lista.length
-      ? `${lista.length} ${lista.length === 1 ? 'fragancia' : 'fragancias'}${filtro !== 'todos' ? ' en ' + filtro : ''}`
-      : '';
+  /* El catálogo se muestra por tandas: 52 tarjetas seguidas son muchísimo
+     scroll, sobre todo en el celular. "Ver más" suma la siguiente tanda
+     sin volver a pintar las que ya están. */
+  const POR_TANDA = 12;
+  let mostrados = 0;
+  let listaActual = [];
+
+  function pintarMas() {
+    const mas = $('#mas');
+    const restan = listaActual.length - mostrados;
+    mas.hidden = restan <= 0;
+    if (restan > 0) {
+      $('#btn-mas').textContent = `Ver más fragancias (${restan})`;
+    }
+  }
+
+  function agregarTanda() {
+    const desde = mostrados;
+    mostrados = Math.min(mostrados + POR_TANDA, listaActual.length);
+    const lote = listaActual.slice(desde, mostrados);
+    grid.insertAdjacentHTML('beforeend', lote.map(cardHTML).join(''));
+    /* Escalón corto (máx. 4 tarjetas): una tanda larga escalonada se siente lenta */
+    Array.from(grid.children).slice(desde).forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 4) * 45}ms`;
+    });
+    pintarMas();
     observarReveal();
+  }
+
+  function render() {
+    listaActual = filtrados();
+    mostrados = 0;
+    grid.innerHTML = '';
+    $('#vacio').hidden = listaActual.length > 0;
+    $('#resultado-info').textContent = listaActual.length
+      ? `${listaActual.length} ${listaActual.length === 1 ? 'fragancia' : 'fragancias'}${filtro !== 'todos' ? ' en ' + filtro : ''}`
+      : '';
+    agregarTanda();
   }
 
   /* ============================================================
@@ -376,8 +406,10 @@
         <div class="tallas">
           ${tamanos(p).map((t) => `<button class="talla ${t === modalTamano ? 'is-active' : ''}" data-talla="${esc(t)}">${esc(t)}</button>`).join('')}
         </div>
-        <div class="modal__precio">${fmt(p.precios[modalTamano])}</div>
-        <button class="btn btn--gold btn--block" data-add-modal="${p.id}">Agregar al pedido</button>
+        <div class="modal__compra">
+          <div class="modal__precio">${fmt(p.precios[modalTamano])}</div>
+          <button class="btn btn--gold btn--block" data-add-modal="${p.id}">Agregar al pedido</button>
+        </div>
       </div>`;
   }
 
@@ -522,6 +554,7 @@
     });
 
     /* Orden */
+    $('#btn-mas').addEventListener('click', agregarTanda);
     $('#orden').addEventListener('change', (e) => { orden = e.target.value; render(); });
 
     /* Buscador */
