@@ -181,6 +181,15 @@
     return lista.slice().sort(cmp);
   }
 
+  /* Calidad de cada perfume: se elige en el panel del dueño.
+     Si un producto no la tiene cargada, se muestra "Consultar". */
+  const CALIDAD = {
+    original:  { corto: 'Original',  largo: 'Original' },
+    g5:        { corto: 'G5',        largo: 'G5' },
+    consultar: { corto: 'Consultar', largo: 'Consultar por el chat' },
+  };
+  const calidadDe = (p) => (CALIDAD[p.calidad] ? p.calidad : 'consultar');
+
   function cardHTML(p) {
     const cat = { hombre: 'Hombre', mujer: 'Mujer', unisex: 'Unisex' }[p.categoria] || p.categoria;
     return `
@@ -191,7 +200,10 @@
         <button class="card__quick" data-ver="${p.id}">Ver detalle</button>
       </div>
       <div class="card__body">
-        <span class="card__cat">${esc(cat)}${p.marca ? ' · ' + esc(p.marca) : ''}</span>
+        <div class="card__top">
+          <span class="card__cat">${esc(cat)}${p.marca ? ' · ' + esc(p.marca) : ''}</span>
+          <span class="calidad calidad--${calidadDe(p)}" title="Calidad: ${CALIDAD[calidadDe(p)].largo}">${CALIDAD[calidadDe(p)].corto}</span>
+        </div>
         <h3 class="card__name">${esc(p.nombre)}</h3>
         <p class="card__fam">${esc(p.familia)} · ${esc(p.duracion)}</p>
         <div class="card__notas">${p.notas.slice(0, 3).map((n) => `<span class="nota">${esc(n)}</span>`).join('')}</div>
@@ -354,7 +366,8 @@
     const lineas = carrito.map((i) => {
       const p = PRODUCTOS.find((x) => x.id === i.id);
       const disp = p.stock ? '' : '  (por encargo)';
-      return `• ${p.marca ? p.marca + ' ' : ''}${p.nombre} — ${i.tamano} × ${i.cant} = ${fmt(p.precios[i.tamano] * i.cant)}${disp}`;
+      const cal = { original: ' · Original', g5: ' · G5' }[calidadDe(p)] || '  (calidad: a confirmar)';
+      return `• ${p.marca ? p.marca + ' ' : ''}${p.nombre}${cal} — ${i.tamano} × ${i.cant} = ${fmt(p.precios[i.tamano] * i.cant)}${disp}`;
     });
     const sub = subtotal();
     const env = costoEnvio();
@@ -401,6 +414,7 @@
         <p class="modal__desc">${esc(p.descripcion)}</p>
         <div class="card__notas">${p.notas.map((n) => `<span class="nota">${esc(n)}</span>`).join('')}</div>
         <div class="modal__dato"><span>Duración estimada</span><b>${esc(p.duracion)}</b></div>
+        <div class="modal__dato"><span>Calidad</span><b class="calidad-${calidadDe(p)}">${CALIDAD[calidadDe(p)].largo}</b></div>
         <div class="modal__dato"><span>Disponibilidad</span><b class="${p.stock ? 'stock-ya' : 'stock-encargo'}">${p.stock ? 'Stock inmediato' : 'Por encargo'}</b></div>
         <p class="modal__label">Elegí el tamaño</p>
         <div class="tallas">
@@ -667,7 +681,6 @@
     /* Los textos y el botón flotante se adaptan al canal activo */
     if (!HAY_WSP) {
       $('#hero-wsp').textContent = 'Consultar por Instagram';
-      $('#nos-wsp').textContent = 'Escribinos por Instagram';
       $('#footer-wsp').textContent = 'Instagram';
       const fab = $('#fab-wsp');
       fab.classList.add('fab--ig');

@@ -132,6 +132,7 @@
           <span class="fila__marcas">
             ${p.destacado ? '<i class="m m-oro">Más vendido</i>' : ''}
             ${p.stock ? '<i class="m m-verde">Stock inmediato</i>' : '<i class="m m-oro">Por encargo</i>'}
+            <i class="m ${p.calidad === 'original' || p.calidad === 'g5' ? 'm-oro' : 'm-gris'}">${{ original: 'Original', g5: 'G5' }[p.calidad] || 'Calidad: consultar'}</i>
             ${p.oculto ? '<i class="m m-gris">Oculto</i>' : ''}
           </span>
         </div>
@@ -156,7 +157,7 @@
   const VACIO = {
     id: '', nombre: '', marca: '', categoria: 'hombre', familia: '',
     descripcion: '', notas: [], duracion: '8–10 h', precios: { '100 ml': 50000 },
-    img: '', tono: ['#2a2a30', '#c9a227'], destacado: false, stock: true,
+    img: '', tono: ['#2a2a30', '#c9a227'], destacado: false, stock: true, calidad: 'consultar',
   };
 
   function abrirFicha(i) {
@@ -177,6 +178,7 @@
     $('#f-img').value = p.img || '';
     $('#f-destacado').checked = !!p.destacado;
     $('#f-stock').value = p.stock ? 'si' : 'no';
+    $('#f-calidad').value = ['original', 'g5', 'consultar'].includes(p.calidad) ? p.calidad : 'consultar';
     $('#f-oculto').checked = !!p.oculto;
     $('#f-tono1').value = (p.tono || [])[0] || '#2a2a30';
     $('#f-tono2').value = (p.tono || [])[1] || '#c9a227';
@@ -338,6 +340,7 @@
       tono: [$('#f-tono1').value, $('#f-tono2').value],
       destacado: $('#f-destacado').checked,
       stock: $('#f-stock').value === 'si',
+      calidad: $('#f-calidad').value,
     };
     if ($('#f-oculto').checked) nuevo.oculto = true;
 
@@ -408,6 +411,7 @@ const CONFIG = {
    CATÁLOGO
    categoria: 'hombre' | 'mujer' | 'unisex'
    stock: true = "Stock inmediato" · false = "Por encargo"
+   calidad: 'original' | 'g5' | 'consultar'
    oculto: true = no aparece en la web (por ejemplo, si falta la foto)
    ------------------------------------------------------------- */
 const PRODUCTOS = [
@@ -429,7 +433,8 @@ const PRODUCTOS = [
     img: ${txt(p.img || '')},
     tono: [${(p.tono || []).map(txt).join(', ')}],
     destacado: ${!!p.destacado},
-    stock: ${!!p.stock},${p.oculto ? '\n    oculto: true,' : ''}
+    stock: ${!!p.stock},
+    calidad: ${txt(['original', 'g5', 'consultar'].includes(p.calidad) ? p.calidad : 'consultar')},${p.oculto ? '\n    oculto: true,' : ''}
   },`;
     }).join('\n');
 

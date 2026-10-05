@@ -6,7 +6,7 @@
 
 const CONFIG = {
   marca: '701 PARFUM',
-  slogan: 'Aromas que hablan por vos',
+  slogan: 'Perfumes calidad original y G5',
   instagram: '701_parfum',
   instagramAlt: 'fmartinn_22',
 
@@ -26,6 +26,7 @@ const CONFIG = {
    CATÁLOGO
    categoria: 'hombre' | 'mujer' | 'unisex'
    stock: true = "Stock inmediato" · false = "Por encargo"
+   calidad: 'original' | 'g5' | 'consultar' (si falta, se muestra "Consultar")
    oculto: true = no aparece en la web (por ejemplo, si falta la foto)
    ------------------------------------------------------------- */
 const PRODUCTOS = [

@@ -17,8 +17,8 @@
   --radio:14px;
   --radio-s:8px;
   --sombra:0 20px 50px rgba(0,0,0,.45);
-  --serif:'Cormorant Garamond', Georgia, serif;
-  --sans:'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --serif:'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --sans:'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --max:1200px;
 }
 
@@ -270,11 +270,6 @@ svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke
 
 .vacio{text-align:center;padding:70px 0;color:var(--texto-2);display:flex;flex-direction:column;align-items:center;gap:20px;}
 
-/* ---------- Nosotros ---------- */
-.nosotros{padding:96px 0;background:var(--negro-2);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);}
-.nosotros__inner{max-width:720px;margin:0 auto;text-align:center;}
-.nosotros__txt p{color:var(--texto-2);margin-left:auto;margin-right:auto;}
-.nosotros__txt .btn{margin-top:14px;}
 /* ---------- FAQ ---------- */
 .faq{padding:96px 0;}
 .faq__list{max-width:760px;margin:0 auto;}
@@ -1022,3 +1017,188 @@ body.ya-scrolleo .parallax__scrollcue{opacity:0;pointer-events:none;}
   .modal__info{min-width:0;}
   .modal__compra .btn{padding-left:12px;padding-right:12px;letter-spacing:.1em;font-size:.74rem;white-space:nowrap;}
 }
+
+/* ---------- "Scroll" del inicio: centrado real ----------
+   Antes se centraba con left:50% + translateX(-50%), pero la animación
+   .entra termina en transform:none y le sacaba el desplazamiento: el aviso
+   quedaba corrido a la derecha. Se centra con márgenes automáticos (no
+   depende de transform) y se compensa el espacio que el letter-spacing
+   deja después de la última letra. */
+.parallax__scrollcue{
+  left:0;right:0;width:max-content;margin-inline:auto;transform:none;
+}
+.parallax__scrollcue span{padding-left:.34em;}
+
+/* ============================================================
+   ESCALA TIPOGRÁFICA — una sola regla para todo el sitio
+   Antes había 22 reglas en mayúsculas, 8 espaciados de letras
+   distintos y textos de 8–10 px. Cuando todo grita, nada destaca.
+   Ahora:
+     · MAYÚSCULAS + espaciado: botones, menú y UNA etiqueta por bloque.
+     · Todo lo demás en minúscula normal (se lee más rápido).
+     · Dos espaciados: --ls-etiqueta (etiquetas) y --ls-boton (botones).
+     · Mínimo legible ~11–12 px; el dorado queda para lo principal.
+   ============================================================ */
+:root{
+  --ls-etiqueta:.16em;
+  --ls-boton:.1em;
+  --ls-texto:.02em;
+}
+
+/* Botones y menú: mayúsculas, un solo espaciado */
+.btn,.nav a,.card__add,.card__quick,.topbar,.frasco-ficha{letter-spacing:var(--ls-boton);}
+.nav a{font-size:.8rem;}
+.topbar{font-size:.76rem;}
+
+/* Etiquetas de bloque: mayúsculas, espaciado moderado, tamaño legible */
+.hero__eyebrow,.sec-eyebrow,.modal__cat,.footer__col h4,.parallax__scrollcue,.modal__label{
+  letter-spacing:var(--ls-etiqueta);font-size:.74rem;
+}
+.modal__label{font-size:.72rem;}
+.parallax__scrollcue{letter-spacing:.24em;font-size:.72rem;}
+.parallax__scrollcue span{padding-left:.24em;}
+
+/* Pasan a minúscula normal: filtros, orden, categoría, "Desde", tamaño y "Eliminar" */
+.chip,.select,.card__cat,.card__precio small,.cart-item__size,.cart-item__del{
+  text-transform:none;letter-spacing:var(--ls-texto);
+}
+.chip{font-size:.88rem;padding:9px 20px;}
+.select{font-size:.86rem;}
+.card__cat{font-size:.78rem;color:var(--texto-2);}      /* ya no es dorado: el dorado se guarda para lo principal */
+.card__precio small{font-size:.76rem;}
+.cart-item__size{font-size:.82rem;}
+.cart-item__del{font-size:.8rem;text-decoration:underline;text-underline-offset:3px;}
+.card__tag{font-size:.66rem;letter-spacing:.12em;}
+
+/* Notas, familia y stock: más grandes y sin espaciado raro */
+.card__stock{text-transform:none;}
+.nota{font-size:.74rem;letter-spacing:var(--ls-texto);}
+.card__fam{font-size:.86rem;}
+.card__stock{font-size:.76rem;letter-spacing:var(--ls-texto);}
+
+/* Títulos: Cormorant en 500 se ve fino sobre fondo oscuro; 600 sostiene mejor */
+.card__name,.modal__nombre,.faq summary,.cart-item__nombre,.cart-item h4{font-weight:600;}
+
+@media(max-width:700px){
+  /* Las tarjetas del celular tenían letra de 8–9 px: se sube a un mínimo legible */
+  .card__cat{font-size:.72rem;letter-spacing:var(--ls-texto);}
+  .card__fam{font-size:.78rem;}
+  .card__notas .nota{font-size:.68rem;padding:3px 8px;}
+  .card__stock{font-size:.7rem;letter-spacing:var(--ls-texto);}
+  .card__precio small{font-size:.7rem;}
+  .card__tag{font-size:.6rem;letter-spacing:.1em;}
+  .card__add{font-size:.72rem;letter-spacing:var(--ls-boton);}
+  .card__quick{font-size:.68rem;}
+  .frasco-ficha{font-size:.64rem;letter-spacing:.12em;padding:6px 12px;}
+  .topbar__inner{font-size:.7rem;}
+  .chip{font-size:.86rem;padding:9px 18px;}
+}
+
+
+/* ---------- Franja de datos (reemplaza la fila de 4 íconos) ---------- */
+.franja{
+  list-style:none;margin:0;padding:22px 0;display:flex;flex-wrap:wrap;justify-content:center;
+  gap:8px 34px;color:var(--texto-2);font-size:.9rem;
+}
+.franja li{position:relative;}
+.franja li + li::before{
+  content:'';position:absolute;left:-18px;top:50%;width:3px;height:3px;border-radius:50%;
+  background:var(--texto-2);opacity:.5;transform:translateY(-50%);
+}
+@media(max-width:700px){
+  .franja{flex-direction:column;align-items:center;gap:6px;padding:20px 0;font-size:.86rem;}
+  .franja li + li::before{display:none;}
+}
+
+/* Sin la etiqueta sobre el "701", el título necesita su aire arriba (era lo que ocupaba la etiqueta) */
+.parallax__layer-title{padding-top:calc(var(--tope, 107px) + 1.4vh + 44px);}
+@media(max-width:700px){
+  .parallax__layer-title{padding-top:calc(var(--tope, 107px) + 0.8vh + 36px);}
+}
+
+
+/* ---------- Títulos más firmes y profesionales ----------
+   Bodoni Moda a tamaño óptico alto tiene líneas finísimas y se ve decorativa.
+   Con un tamaño óptico más bajo los trazos finos engrosan: más sobria y legible. */
+h1,h2,h3,h4,.logo__num,.card__precio strong,.modal__precio,.sec-title{
+  font-optical-sizing:none;
+  font-variation-settings:"opsz" 22;
+  letter-spacing:0;
+}
+h1,h2,.sec-title{font-weight:500;}
+
+/* ---------- Opiniones de clientes: coverflow 3D ---------- */
+.clientes{padding:88px 0 80px;border-top:1px solid var(--linea);background:var(--negro-2);overflow:hidden;}
+.clientes[hidden]{display:none;}
+.cover{position:relative;outline:none;perspective:1200px;}
+.cover:focus-visible{outline:1px dashed var(--oro);outline-offset:8px;}
+.cover__escena{
+  position:relative;height:500px;margin:0 auto;transform-style:preserve-3d;
+  touch-action:pan-y;user-select:none;-webkit-user-select:none;
+}
+.cover__item{
+  position:absolute;left:50%;top:50%;width:250px;height:396px;padding:0;
+  border:1px solid var(--linea-fuerte);border-radius:18px;overflow:hidden;background:var(--negro-3);
+  box-shadow:0 22px 50px rgba(0,0,0,.55);cursor:pointer;transform-style:preserve-3d;
+  transition:transform var(--t-lento) var(--ease-entra),opacity var(--t-medio) ease;
+  will-change:transform;
+}
+.cover__item img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;}
+/* Las de los costados se ven apagadas; la del centro, nítida y con borde dorado sutil */
+.cover__item::after{
+  content:'';position:absolute;inset:0;background:rgba(8,8,10,.38);pointer-events:none;
+  transition:opacity var(--t-medio) ease;
+}
+.cover__item.is-activo{border-color:rgba(201,162,39,.55);cursor:zoom-in;}
+.cover__item.is-activo::after{opacity:0;}
+.cover__item:focus-visible{outline:2px solid var(--oro);outline-offset:3px;}
+.cover__controles{display:flex;justify-content:center;gap:14px;margin-top:22px;}
+.cover__btn{padding:10px 26px;}
+.cover__btn:disabled{opacity:.35;pointer-events:none;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+@media(max-width:700px){
+  .clientes{padding:64px 0 56px;}
+  .cover__escena{height:430px;}
+  .cover__item{width:210px;height:332px;}
+}
+@media(prefers-reduced-motion:reduce){.cover__item{transition:none;}}
+.clientes__visor{
+  border:0;padding:0;background:transparent;max-width:min(92vw,520px);max-height:92vh;
+  margin:auto;overflow:visible;
+}
+.clientes__visor::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(3px);}
+.clientes__visor img{display:block;max-width:100%;max-height:92vh;margin:auto;border-radius:12px;}
+@media(prefers-reduced-motion:reduce){.clientes__item{transition:none;}}
+
+
+/* ---------- Títulos serios: sans-serif firme ----------
+   Se reemplazó la serif decorativa por la misma familia del texto, en peso
+   medio-alto y con el espaciado apretado: se ve sobria y profesional. */
+h1,h2,h3,h4,.card__name,.modal__nombre,.sec-title,.card__precio strong,.modal__precio,.faq summary{
+  font-family:var(--serif);font-weight:600;letter-spacing:-.015em;font-variation-settings:normal;
+}
+.card__name{font-size:1.2rem;}
+.modal__nombre{font-size:1.9rem;}
+.card__precio strong{font-size:1.35rem;letter-spacing:-.01em;}
+.modal__precio{font-size:2rem;}
+.faq summary{font-size:1.1rem;font-weight:500;letter-spacing:0;}
+.logo__num{font-weight:600;letter-spacing:0;}
+.marca__txt{font-style:normal;letter-spacing:.3em;text-transform:uppercase;}
+
+[data-link-clientes][hidden]{display:none !important;}
+
+/* Outfit se ve más fina y minimalista en peso medio */
+h1,h2,h3,h4,.card__name,.modal__nombre,.sec-title,.card__precio strong,.modal__precio{font-weight:500;}
+
+
+/* ---------- Calidad del perfume (Original / G5 / Consultar) ---------- */
+.card__top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.calidad{
+  flex:0 0 auto;font-size:.7rem;font-weight:500;letter-spacing:.04em;line-height:1;
+  padding:5px 10px;border-radius:100px;border:1px solid var(--linea-fuerte);color:var(--texto);
+}
+.calidad--original{border-color:rgba(201,162,39,.6);color:var(--oro-claro);}
+.calidad--g5{border-color:var(--texto-2);color:var(--texto);}
+.calidad--consultar{border-style:dashed;color:var(--texto-2);}
+.modal__dato b.calidad-original{color:var(--oro-claro);}
+.modal__dato b.calidad-consultar{color:var(--texto-2);font-weight:400;}
