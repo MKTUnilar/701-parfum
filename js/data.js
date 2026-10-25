@@ -1,6 +1,6 @@
 /* =============================================================
    701 PARFUM — Configuración y catálogo
-   Generado desde el panel el 25/10/2026, 10:16:35.
+   Generado desde el panel el 25/10/2026, 10:25:37.
    Se puede editar a mano igual: es un archivo de texto común.
    ============================================================= */
 
@@ -39,12 +39,12 @@ const PRODUCTOS = [
     descripcion: 'La versión más oscura e intensa de la línea Hawas. Especias cálidas sobre maderas y ámbar, con una estela profunda ideal para la noche.',
     notas: ['Especias', 'Maderas', 'Ámbar', 'Cuero'],
     duracion: '9–11 h',
-    precios: { '100 ml': 75000 },
+    precios: { '100 ml': 50000 },
     img: 'assets/img/hawas-kobra.webp',
     tono: ['#2a0c0c', '#7d2320'],
-    destacado: true,
-    stock: false,
-    calidad: 'consultar',
+    destacado: false,
+    stock: true,
+    calidad: 'g5',
   },
   {
     id: 'hawas-black',
