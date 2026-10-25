@@ -1,6 +1,6 @@
 /* =============================================================
    701 PARFUM — Configuración y catálogo
-   Generado desde el panel el 14/9/2026, 06:56:21.
+   Generado desde el panel el 25/10/2026, 10:16:35.
    Se puede editar a mano igual: es un archivo de texto común.
    ============================================================= */
 
@@ -26,7 +26,7 @@ const CONFIG = {
    CATÁLOGO
    categoria: 'hombre' | 'mujer' | 'unisex'
    stock: true = "Stock inmediato" · false = "Por encargo"
-   calidad: 'original' | 'g5' | 'consultar' (si falta, se muestra "Consultar")
+   calidad: 'original' | 'g5' | 'consultar'
    oculto: true = no aparece en la web (por ejemplo, si falta la foto)
    ------------------------------------------------------------- */
 const PRODUCTOS = [
@@ -39,11 +39,12 @@ const PRODUCTOS = [
     descripcion: 'La versión más oscura e intensa de la línea Hawas. Especias cálidas sobre maderas y ámbar, con una estela profunda ideal para la noche.',
     notas: ['Especias', 'Maderas', 'Ámbar', 'Cuero'],
     duracion: '9–11 h',
-    precios: { '100 ml': 50000 },
+    precios: { '100 ml': 75000 },
     img: 'assets/img/hawas-kobra.webp',
     tono: ['#2a0c0c', '#7d2320'],
     destacado: true,
-    stock: true,
+    stock: false,
+    calidad: 'consultar',
   },
   {
     id: 'hawas-black',
@@ -54,11 +55,12 @@ const PRODUCTOS = [
     descripcion: 'Elegante y versátil. Cítricos frescos que abren paso a un corazón aromático y un fondo de maderas oscuras. Va de la oficina a la noche sin escalas.',
     notas: ['Cítricos', 'Lavanda', 'Cedro', 'Almizcle'],
     duracion: '8–10 h',
-    precios: { '100 ml': 150000 },
+    precios: { '100 ml': 50000 },
     img: 'assets/img/hawas-black.webp',
     tono: ['#0c0c0e', '#3a3a42'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'hawas-atlantis',
@@ -74,6 +76,7 @@ const PRODUCTOS = [
     tono: ['#0a2f3d', '#2f9fb8'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'hawas-elixir',
@@ -89,6 +92,7 @@ const PRODUCTOS = [
     tono: ['#4a3208', '#d4a437'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'hawas-tropical',
@@ -104,6 +108,7 @@ const PRODUCTOS = [
     tono: ['#0d3a2c', '#3f9e73'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'cdn-urban-elixir',
@@ -119,6 +124,7 @@ const PRODUCTOS = [
     tono: ['#1a1226', '#5b4b7d'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'odyssey-artisto',
@@ -134,6 +140,7 @@ const PRODUCTOS = [
     tono: ['#3d0a0a', '#c2352e'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'odyssey-aqua',
@@ -149,6 +156,7 @@ const PRODUCTOS = [
     tono: ['#0e3c4a', '#5cc6d8'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'asad-elixir',
@@ -164,6 +172,7 @@ const PRODUCTOS = [
     tono: ['#14140f', '#4f5148'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'vulcan',
@@ -179,6 +188,7 @@ const PRODUCTOS = [
     tono: ['#0c0c0c', '#4a4a52'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'atlantis-extrait',
@@ -194,6 +204,7 @@ const PRODUCTOS = [
     tono: ['#141a45', '#4b56b8'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'hawas-him',
@@ -209,6 +220,7 @@ const PRODUCTOS = [
     tono: ['#0f2b4a', '#3f7fb5'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'hawas-malibu',
@@ -224,6 +236,7 @@ const PRODUCTOS = [
     tono: ['#0a2a3d', '#2f8fa8'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'odyssey-mandarin-sky',
@@ -239,6 +252,7 @@ const PRODUCTOS = [
     tono: ['#1d5f7d', '#f0a02a'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'bharara-king',
@@ -254,6 +268,7 @@ const PRODUCTOS = [
     tono: ['#1a1210', '#7a5a3a'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'qaaed',
@@ -269,6 +284,7 @@ const PRODUCTOS = [
     tono: ['#3a2a0c', '#d4a437'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'qaed-al-fursan',
@@ -284,6 +300,7 @@ const PRODUCTOS = [
     tono: ['#e8e2d4', '#c9a227'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'cdn-sillage',
@@ -299,6 +316,7 @@ const PRODUCTOS = [
     tono: ['#2a2d33', '#9aa3ad'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'bharara-king-gold',
@@ -314,6 +332,7 @@ const PRODUCTOS = [
     tono: ['#3a2a08', '#e0b83c'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'nitro-red',
@@ -329,6 +348,7 @@ const PRODUCTOS = [
     tono: ['#5c0d12', '#c8323a'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'afnan-9pm-elixir',
@@ -344,6 +364,7 @@ const PRODUCTOS = [
     tono: ['#2b1408', '#b06a24'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'vulcan-feu',
@@ -359,6 +380,7 @@ const PRODUCTOS = [
     tono: ['#0d5f7d', '#4fc0e0'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'hawas-eclat',
@@ -374,6 +396,7 @@ const PRODUCTOS = [
     tono: ['#e6d5d8', '#b98a9a'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'hawas-diva',
@@ -389,6 +412,7 @@ const PRODUCTOS = [
     tono: ['#4a0d24', '#a82c50'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'bonita-hot-pink',
@@ -404,6 +428,7 @@ const PRODUCTOS = [
     tono: ['#f0e6dc', '#e0518a'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'sweet-paradise',
@@ -419,6 +444,7 @@ const PRODUCTOS = [
     tono: ['#f2ece4', '#c9a227'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'historic-doria',
@@ -434,6 +460,7 @@ const PRODUCTOS = [
     tono: ['#e8ccd2', '#c98ba0'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'miss-armaf-magnifiq',
@@ -449,6 +476,7 @@ const PRODUCTOS = [
     tono: ['#2b1a12', '#b07a4a'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'vulcan-baie',
@@ -464,6 +492,7 @@ const PRODUCTOS = [
     tono: ['#e85f9c', '#f2b6d0'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'odyssey-candee',
@@ -479,6 +508,7 @@ const PRODUCTOS = [
     tono: ['#f4dfe6', '#e58fae'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'kayali-eden',
@@ -494,6 +524,7 @@ const PRODUCTOS = [
     tono: ['#5c0d1c', '#c23b52'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'whipped-pleasure',
@@ -509,6 +540,7 @@ const PRODUCTOS = [
     tono: ['#f0e2c8', '#c98b3e'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'cookie-crave',
@@ -524,6 +556,7 @@ const PRODUCTOS = [
     tono: ['#3b2416', '#a5713f'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'yara-moi',
@@ -539,6 +572,7 @@ const PRODUCTOS = [
     tono: ['#f0e6d8', '#c9a227'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'berry-on-top',
@@ -554,6 +588,7 @@ const PRODUCTOS = [
     tono: ['#7d1220', '#e0576b'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'mallow-madness',
@@ -569,6 +604,7 @@ const PRODUCTOS = [
     tono: ['#5a3a7d', '#c9a3e0'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'teriaq-intense',
@@ -584,6 +620,7 @@ const PRODUCTOS = [
     tono: ['#3b2416', '#a5713f'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'odyssey-marshmallow',
@@ -599,6 +636,7 @@ const PRODUCTOS = [
     tono: ['#a8d8d4', '#f0b8c8'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'nectar-of-ecstasy',
@@ -614,6 +652,7 @@ const PRODUCTOS = [
     tono: ['#a8760c', '#f0c93c'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'club-carnival-women',
@@ -629,6 +668,7 @@ const PRODUCTOS = [
     tono: ['#4a2e08', '#d8a441'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'cdn-untold',
@@ -644,6 +684,7 @@ const PRODUCTOS = [
     tono: ['#4a0f1e', '#b2364f'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'khair-fusion',
@@ -659,6 +700,7 @@ const PRODUCTOS = [
     tono: ['#5c3208', '#e29a2e'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'ishq-al-shuyukh-silver',
@@ -674,6 +716,7 @@ const PRODUCTOS = [
     tono: ['#141416', '#9aa0a8'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'santal-33',
@@ -689,6 +732,7 @@ const PRODUCTOS = [
     tono: ['#d8cfc0', '#8a7f6d'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'veneno',
@@ -704,6 +748,7 @@ const PRODUCTOS = [
     tono: ['#0d0d0f', '#c9a227'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'amber-oud-gold',
@@ -719,6 +764,7 @@ const PRODUCTOS = [
     tono: ['#6b5312', '#e6cd82'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'odyssey-go-mango',
@@ -734,6 +780,7 @@ const PRODUCTOS = [
     tono: ['#8a6a0e', '#f0c23a'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'art-of-universe',
@@ -749,6 +796,7 @@ const PRODUCTOS = [
     tono: ['#132a52', '#4a6fa8'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'island-cream-macaroon',
@@ -764,6 +812,7 @@ const PRODUCTOS = [
     tono: ['#0d6b70', '#4fd0d4'],
     destacado: true,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'asad-bourbon',
@@ -779,6 +828,7 @@ const PRODUCTOS = [
     tono: ['#3d2317', '#9a6440'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'bon-bon',
@@ -794,6 +844,7 @@ const PRODUCTOS = [
     tono: ['#0e7a80', '#5fd8de'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
   {
     id: 'liquid-brun',
@@ -809,5 +860,6 @@ const PRODUCTOS = [
     tono: ['#3a2018', '#8a5a3c'],
     destacado: false,
     stock: true,
+    calidad: 'consultar',
   },
 ];
